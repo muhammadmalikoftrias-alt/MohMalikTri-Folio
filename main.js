@@ -185,6 +185,7 @@ window.addEventListener('resize', () => {
 // --- Gen-Z Robot Companion (Synthesis AI) Interactive Engine ---
 const robot3dWrapper = document.getElementById('robot-3d-wrapper');
 const robotSvg = document.getElementById('robot-svg');
+const aiShockwave = document.getElementById('ai-shockwave');
 const pupilLeft = document.querySelector('.robot-pupil-left-group');
 const pupilRight = document.querySelector('.robot-pupil-right-group');
 const overlayPupilLeft = document.querySelector('.overlay-pupil-left');
@@ -193,22 +194,79 @@ const eyesGroups = document.querySelectorAll('.robot-eyes-group');
 const synthesisBubble = document.getElementById('synthesis-bubble');
 const synthesisSpeechText = document.getElementById('synthesis-speech-text');
 const synthesisEmoji = document.getElementById('synthesis-emoji');
+const synthesisPill = document.getElementById('synthesis-status-pill');
+const pillTitleText = document.getElementById('pill-title-text');
+const pillModeBadge = document.getElementById('pill-mode-badge');
+const pillLiveDot = document.getElementById('pill-live-dot');
+const synthesisCoreTitle = document.getElementById('synthesis-core-title');
+const synthesisCoreDesc = document.getElementById('synthesis-core-desc');
 
-const genZQuotes = [
-    { emoji: "🧬", text: "No cap, sekuensing DNA di portfolio Malik literally 100/100 slay! ✨" },
-    { emoji: "⚛️", text: "Quantum entanglement locked in! Zero entropy, pure science rizz ⚡🔬" },
-    { emoji: "🧪", text: "Resonansi Benzena C₆H₆ stabil! We are literally cooking clean code 🍳🧪" },
-    { emoji: "🌌", text: "Lowkey vibrating at Heisenberg uncertainty limits... smooth AF! 🛸" },
-    { emoji: "🔬", text: "Mitosis seluler selesai, siap deploy inovasi edukasi sains ber-impact! 🚀" },
-    { emoji: "🎓", text: "Science Educator x Tech Innovator energy is totally elite! 🔥" },
-    { emoji: "⚡", text: "Tap me lagi buat eksitasi elektron & discharge foton kuantum! 💥🔋" }
+const badgeBio = document.getElementById('badge-bio');
+const badgePhys = document.getElementById('badge-phys');
+const badgeChem = document.getElementById('badge-chem');
+
+// 🧬 ⚛️ 🧪 Multiverse Science Modes for Synthesis AI
+const scienceModes = [
+    {
+        id: 'mode-hyper',
+        pillTitle: 'SYNTHESIS NEXUS // AI SAINS',
+        pillBadge: 'v3.0 QUANTUM',
+        pillBadgeClass: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+        dotColor: 'bg-emerald-400',
+        titleText: 'SYNTHESIS',
+        titleGrad: 'from-emerald-400 via-sky-300 to-amber-300',
+        descText: 'Autonomous Science Intelligence • Bioscience, Physics & Chemistry',
+        shockwaveStroke: '#00f5ff',
+        quote: { emoji: "🌌", text: "Hyper-Singularity active! Biologi, Fisika, & Kimia fully harmonized! ✨" },
+        soundFrequencies: [523.25, 659.25, 783.99, 987.77, 1046.5]
+    },
+    {
+        id: 'mode-bio',
+        pillTitle: 'SYNTHESIS // 🧬 BIO-RESONANCE',
+        pillBadge: 'OVERDRIVE',
+        pillBadgeClass: 'text-emerald-300 bg-emerald-500/20 border-emerald-400/40',
+        dotColor: 'bg-emerald-400',
+        titleText: 'SYNTHESIS // BIO',
+        titleGrad: 'from-emerald-300 via-teal-300 to-cyan-400',
+        descText: 'Cellular Biology Overdrive • DNA Helix Sequencing & Mitosis Energy',
+        shockwaveStroke: '#10b981',
+        quote: { emoji: "🧬", text: "Bio-Resonance Overdrive! DNA double-helix turbocharged with cellular energy! 🌱🔬" },
+        soundFrequencies: [440, 554.37, 659.25, 880]
+    },
+    {
+        id: 'mode-physics',
+        pillTitle: 'SYNTHESIS // ⚛️ QUANTUM SUPERPOSITION',
+        pillBadge: 'SUPERCHARGED',
+        pillBadgeClass: 'text-amber-300 bg-amber-500/20 border-amber-400/40',
+        dotColor: 'bg-amber-400',
+        titleText: 'SYNTHESIS // QUANTUM',
+        titleGrad: 'from-amber-300 via-yellow-200 to-orange-400',
+        descText: 'Quantum Superposition Active • Bohr Orbits Relativistic Acceleration',
+        shockwaveStroke: '#fde047',
+        quote: { emoji: "⚛️", text: "Quantum Superposition online! Orbits accelerated & event horizon plasma flare! ⚡🌌" },
+        soundFrequencies: [587.33, 739.99, 880, 1174.66]
+    },
+    {
+        id: 'mode-chem',
+        pillTitle: 'SYNTHESIS // 🧪 MOLECULAR SYNTHESIS',
+        pillBadge: 'RESONANCE',
+        pillBadgeClass: 'text-sky-300 bg-sky-500/20 border-sky-400/40',
+        dotColor: 'bg-sky-400',
+        titleText: 'SYNTHESIS // MOLECULAR',
+        titleGrad: 'from-sky-300 via-cyan-300 to-blue-400',
+        descText: 'Molecular Synthesis Excited • Benzene Ring Resonance & Covalent Bonds',
+        shockwaveStroke: '#00f5ff',
+        quote: { emoji: "🧪", text: "Molecular Synthesis excited! Benzene ring resonating with sp³ covalent power! 🍳🧪" },
+        soundFrequencies: [659.25, 830.61, 987.77, 1318.51]
+    }
 ];
-let currentQuoteIndex = 0;
+
+let currentModeIndex = 0;
 let bubbleTimeout = null;
 
 function showSpeechBubble(quote) {
     if (!synthesisBubble) return;
-    const item = quote || genZQuotes[currentQuoteIndex];
+    const item = quote || scienceModes[currentModeIndex].quote;
     if (synthesisEmoji) synthesisEmoji.textContent = item.emoji;
     if (synthesisSpeechText) synthesisSpeechText.textContent = item.text;
     synthesisBubble.classList.add('active');
@@ -218,50 +276,116 @@ function showSpeechBubble(quote) {
     }, 5000);
 }
 
-function nextSpeechBubble() {
-    currentQuoteIndex = (currentQuoteIndex + 1) % genZQuotes.length;
-    showSpeechBubble(genZQuotes[currentQuoteIndex]);
-}
-
-// Playful & Elegant Gen-Z Quantum Chime via Web Audio API (Crystal Harmonic Chord)
-function playCyberChime() {
+// Playful & Elegant Quantum Chime via Web Audio API
+function playCyberChime(frequencies) {
     try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtx) return;
         const ctx = new AudioCtx();
         if (ctx.state === 'suspended') ctx.resume();
 
-        // Crystal quantum chords: C5 (523.25Hz), E5 (659.25Hz), G5 (783.99Hz), B5 (987.77Hz), C6 (1046.5Hz)
-        const notes = [523.25, 659.25, 783.99, 987.77, 1046.5];
+        const notes = (frequencies && frequencies.length) ? frequencies : [523.25, 659.25, 783.99, 987.77, 1046.5];
         notes.forEach((freq, i) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.05);
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.04);
 
-            gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.07, ctx.currentTime + i * 0.05 + 0.015);
-            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.05 + 0.35);
+            gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.07, ctx.currentTime + i * 0.04 + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.04 + 0.35);
 
             osc.connect(gain);
             gain.connect(ctx.destination);
-            osc.start(ctx.currentTime + i * 0.05);
-            osc.stop(ctx.currentTime + i * 0.05 + 0.36);
+            osc.start(ctx.currentTime + i * 0.04);
+            osc.stop(ctx.currentTime + i * 0.04 + 0.36);
         });
     } catch (e) {
         // Fallback silently if audio blocked by browser policy
     }
 }
 
-// Click & Tap Interaction on Robot
+// Apply Science Mode on AI
+function applyScienceMode(index, playSound = true) {
+    currentModeIndex = ((index % scienceModes.length) + scienceModes.length) % scienceModes.length;
+    const mode = scienceModes[currentModeIndex];
+
+    // 1. Update SVG Root Classes for Visual Shifts
+    if (robotSvg) {
+        robotSvg.classList.remove('mode-hyper', 'mode-bio', 'mode-physics', 'mode-chem');
+        robotSvg.classList.add(mode.id);
+    }
+
+    // 2. Trigger Expanding Shockwave Wavefront
+    if (aiShockwave) {
+        aiShockwave.setAttribute('stroke', mode.shockwaveStroke);
+        aiShockwave.classList.remove('ai-shockwave-pulse');
+        void aiShockwave.offsetWidth; // force reflow
+        aiShockwave.classList.add('ai-shockwave-pulse');
+    }
+
+    // 3. Trigger Pupil Excited Dilation
+    const pupils = document.querySelectorAll('.robot-pupil');
+    pupils.forEach(p => {
+        p.classList.remove('ai-pupil-dilate');
+        void p.offsetWidth;
+        p.classList.add('ai-pupil-dilate');
+        setTimeout(() => p.classList.remove('ai-pupil-dilate'), 750);
+    });
+
+    // 4. Update Status Pill
+    if (pillTitleText) pillTitleText.textContent = mode.pillTitle;
+    if (pillModeBadge) {
+        pillModeBadge.textContent = mode.pillBadge;
+        pillModeBadge.className = `font-mono text-[10px] font-bold px-1.5 py-0.5 rounded border ${mode.pillBadgeClass}`;
+    }
+    if (pillLiveDot) {
+        pillLiveDot.className = `relative inline-flex rounded-full h-2 w-2 ${mode.dotColor}`;
+    }
+
+    // 5. Update Typography Below AI
+    if (synthesisCoreTitle) {
+        synthesisCoreTitle.textContent = mode.titleText;
+        synthesisCoreTitle.className = `text-2xl md:text-3xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r ${mode.titleGrad} transition-all duration-300`;
+    }
+    if (synthesisCoreDesc) {
+        synthesisCoreDesc.textContent = mode.descText;
+    }
+
+    // 6. Highlight Corresponding Bottom Badge
+    const badgeConfigs = [
+        { el: badgeBio, modeId: 'mode-bio', activeClass: 'ring-2 ring-emerald-400 bg-emerald-500/30 scale-105 shadow-md shadow-emerald-500/30' },
+        { el: badgePhys, modeId: 'mode-physics', activeClass: 'ring-2 ring-amber-400 bg-amber-500/30 scale-105 shadow-md shadow-amber-500/30' },
+        { el: badgeChem, modeId: 'mode-chem', activeClass: 'ring-2 ring-sky-400 bg-sky-500/30 scale-105 shadow-md shadow-sky-500/30' }
+    ];
+
+    badgeConfigs.forEach(b => {
+        if (!b.el) return;
+        b.el.classList.remove(
+            'ring-2', 'ring-emerald-400', 'ring-amber-400', 'ring-sky-400',
+            'bg-emerald-500/30', 'bg-amber-500/30', 'bg-sky-500/30',
+            'scale-105', 'shadow-md', 'shadow-emerald-500/30', 'shadow-amber-500/30', 'shadow-sky-500/30'
+        );
+        if (mode.id === b.modeId) {
+            b.activeClass.split(' ').forEach(cls => b.el.classList.add(cls));
+        }
+    });
+
+    // 7. Show Speech Quote & Play Audio
+    showSpeechBubble(mode.quote);
+    if (playSound) {
+        playCyberChime(mode.soundFrequencies);
+    }
+}
+
+// Click & Tap Interaction on AI Entity
 if (robot3dWrapper) {
     robot3dWrapper.addEventListener('click', () => {
-        playCyberChime();
-        nextSpeechBubble();
+        // Cycle to next science state
+        applyScienceMode(currentModeIndex + 1);
 
         // Celebration pop animation
         robot3dWrapper.classList.remove('robot-celebrate');
-        // Trigger reflow
         void robot3dWrapper.offsetWidth;
         robot3dWrapper.classList.add('robot-celebrate');
 
@@ -274,6 +398,33 @@ if (robot3dWrapper) {
 
     robot3dWrapper.addEventListener('mouseenter', () => {
         showSpeechBubble();
+    });
+}
+
+// Clicking the status pill also cycles mode
+if (synthesisPill) {
+    synthesisPill.addEventListener('click', () => {
+        applyScienceMode(currentModeIndex + 1);
+    });
+}
+
+// Direct badge clicks
+if (badgeBio) {
+    badgeBio.addEventListener('click', (e) => {
+        e.stopPropagation();
+        applyScienceMode(1);
+    });
+}
+if (badgePhys) {
+    badgePhys.addEventListener('click', (e) => {
+        e.stopPropagation();
+        applyScienceMode(2);
+    });
+}
+if (badgeChem) {
+    badgeChem.addEventListener('click', (e) => {
+        e.stopPropagation();
+        applyScienceMode(3);
     });
 }
 

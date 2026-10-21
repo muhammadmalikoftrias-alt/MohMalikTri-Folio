@@ -285,6 +285,120 @@
             animation: robotPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
 
+        /* 💥 Energy Shockwave on AI Click */
+        #ai-shockwave {
+            transform-origin: 140px 150px;
+        }
+        .ai-shockwave-pulse {
+            animation: shockwaveExpand 0.85s cubic-bezier(0.1, 0.8, 0.3, 1) forwards !important;
+        }
+
+        @keyframes shockwaveExpand {
+            0% {
+                transform: scale(0.15);
+                opacity: 0.95;
+                stroke-width: 4px;
+            }
+            100% {
+                transform: scale(1.35);
+                opacity: 0;
+                stroke-width: 0.5px;
+            }
+        }
+
+        /* 👁️ Pupil Dilation Excited Reaction */
+        .ai-pupil-dilate {
+            animation: pupilExcited 0.75s ease-in-out !important;
+        }
+
+        @keyframes pupilExcited {
+            0% { transform: scale(1); }
+            35% { transform: scale(1.4); }
+            70% { transform: scale(0.85); }
+            100% { transform: scale(1); }
+        }
+
+        /* 🧬 Dynamic Science State Overdrives */
+        /* Mode 1: BIOLOGY OVERDRIVE */
+        .mode-bio .robot-dna-strand {
+            animation: dnaTurbo 1.2s ease-in-out infinite alternate !important;
+            filter: drop-shadow(0 0 16px #10b981) drop-shadow(0 0 28px #34d399) !important;
+        }
+        @keyframes dnaTurbo {
+            0% { transform: scale(0.95); opacity: 0.85; }
+            100% { transform: scale(1.08); opacity: 1; }
+        }
+        .mode-bio .robot-arm-left {
+            animation: bioPodPulse 1.8s ease-in-out infinite alternate !important;
+            filter: drop-shadow(0 0 14px #10b981);
+        }
+        @keyframes bioPodPulse {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-9px) scale(1.15); }
+        }
+        .mode-bio .ai-core-aura {
+            fill: url(#auraGradBio) !important;
+        }
+        .mode-bio .robot-pupil {
+            fill: url(#pupilGradBio) !important;
+        }
+
+        /* Mode 2: PHYSICS QUANTUM SUPERPOSITION */
+        .mode-physics .robot-physics-orbits {
+            animation: orbitsRotate 4.8s linear infinite !important;
+        }
+        .mode-physics .robot-physics-counter-orbits {
+            animation: orbitsRotateReverse 7s linear infinite !important;
+        }
+        .mode-physics .ai-singularity-core {
+            animation: singularityPulse 1.2s ease-in-out infinite alternate !important;
+        }
+        @keyframes singularityPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 6px #fde047); }
+            100% { transform: scale(1.5); filter: drop-shadow(0 0 22px #f59e0b) drop-shadow(0 0 35px #ffffff); }
+        }
+        .mode-physics .ai-core-aura {
+            fill: url(#auraGradPhys) !important;
+        }
+        .mode-physics .robot-pupil {
+            fill: url(#pupilGradPhys) !important;
+        }
+
+        /* Mode 3: CHEMISTRY MOLECULAR SYNTHESIS */
+        .mode-chem .robot-chem-hexagon {
+            animation: chemTurbo 1.5s ease-in-out infinite alternate !important;
+            filter: drop-shadow(0 0 18px #00f5ff) drop-shadow(0 0 30px #3b82f6) !important;
+        }
+        @keyframes chemTurbo {
+            0% { transform: scale(0.97); stroke-width: 2.2px; }
+            100% { transform: scale(1.06); stroke-width: 3.8px; }
+        }
+        .mode-chem .robot-arm-right {
+            animation: chemPodPulse 1.8s ease-in-out infinite alternate !important;
+            filter: drop-shadow(0 0 14px #00f5ff);
+        }
+        @keyframes chemPodPulse {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-9px) scale(1.15); }
+        }
+        .mode-chem .ai-core-aura {
+            fill: url(#auraGradChem) !important;
+        }
+        .mode-chem .robot-pupil {
+            fill: url(#pupilGradChem) !important;
+        }
+
+        /* Mode 4: HYPER-SINGULARITY */
+        .mode-hyper .robot-physics-orbits {
+            animation: orbitsRotate 7.5s linear infinite !important;
+        }
+        .mode-hyper .robot-dna-strand {
+            animation: dnaPulse 1.6s ease-in-out infinite alternate !important;
+        }
+        .mode-hyper .robot-chem-hexagon {
+            animation: chemGlow 1.8s ease-in-out infinite alternate !important;
+        }
+
         @keyframes robotPop {
             0% { transform: scale(1) rotate(0deg); }
             25% { transform: scale(1.15) translateY(-22px) rotate(-8deg); }
@@ -740,11 +854,17 @@
     </div>
     <section class="pt-24 md:pt-28 pb-20" id="home">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                <div class="flex flex-col justify-start">
                     <div
-                        class="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-900/50 border border-emerald-500/25 text-sm mb-4">
-                        <span class="text-emerald-400 font-semibold">Available For Work 👋🏻</span>
+                        class="inline-flex items-center gap-2 px-4 py-1.5 h-9 rounded-full bg-slate-900/80 border border-emerald-500/30 backdrop-blur-md shadow-lg shadow-emerald-500/10 mb-4 select-none self-start">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                        </span>
+                        <span class="text-emerald-400 font-semibold text-xs tracking-wider font-mono">AVAILABLE FOR WORK</span>
+                        <span class="text-white/20">|</span>
+                        <span class="text-slate-300 text-xs font-medium">👋🏻 Let's Connect</span>
                     </div>
                     <h1 class="text-4xl md:text-6xl font-bold entry-load-hidden">Welcome To</h1>
                     <h2
@@ -763,17 +883,17 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex justify-center items-center">
+                <div class="flex justify-center items-start pt-0">
                     <div class="w-full max-w-[480px] flex flex-col items-center text-center entry-load-hidden robot-card-container">
                         <!-- Gen-Z Floating AI Status Pill -->
-                        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 backdrop-blur-xl shadow-lg shadow-cyan-500/15 mb-2 select-none">
+                        <div id="synthesis-status-pill" class="inline-flex items-center gap-2.5 px-4 py-1.5 h-9 rounded-full bg-slate-900/90 border border-cyan-500/40 backdrop-blur-xl shadow-lg shadow-cyan-500/15 mb-4 select-none cursor-pointer transition-all duration-300 hover:scale-105">
                             <span class="relative flex h-2 w-2">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                                <span id="pill-ping-dot" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                <span id="pill-live-dot" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
                             </span>
-                            <span class="font-mono text-cyan-300 font-extrabold text-xs tracking-wider">SYNTHESIS NEXUS // AI SAINS</span>
+                            <span id="pill-title-text" class="font-mono text-cyan-300 font-extrabold text-xs tracking-wider">SYNTHESIS NEXUS // AI SAINS</span>
                             <span class="text-white/20">|</span>
-                            <span class="text-emerald-400 font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">v3.0 QUANTUM</span>
+                            <span id="pill-mode-badge" class="text-emerald-400 font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">v3.0 QUANTUM</span>
                         </div>
 
                         <!-- Speech Bubble -->
@@ -818,12 +938,54 @@
                                         <stop offset="100%" stop-color="#00020a" stop-opacity="1" />
                                     </radialGradient>
 
-                                    <!-- 🌌 Quantum Wavefunction Aura -->
+                                    <!-- 🌌 Quantum Wavefunction Aura (Default) -->
                                     <radialGradient id="auraGrad" cx="50%" cy="50%" r="50%">
                                         <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.45" />
                                         <stop offset="40%" stop-color="#6366f1" stop-opacity="0.25" />
                                         <stop offset="75%" stop-color="#10b981" stop-opacity="0.12" />
                                         <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+                                    </radialGradient>
+
+                                    <!-- 🧬 Bio Overdrive Auras & Pupils -->
+                                    <radialGradient id="auraGradBio" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.65" />
+                                        <stop offset="45%" stop-color="#059669" stop-opacity="0.35" />
+                                        <stop offset="80%" stop-color="#06b6d4" stop-opacity="0.15" />
+                                        <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="pupilGradBio" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#a7f3d0" />
+                                        <stop offset="70%" stop-color="#10b981" />
+                                        <stop offset="100%" stop-color="#047857" />
+                                    </radialGradient>
+
+                                    <!-- ⚛️ Physics Superposition Auras & Pupils -->
+                                    <radialGradient id="auraGradPhys" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#fde047" stop-opacity="0.65" />
+                                        <stop offset="45%" stop-color="#f59e0b" stop-opacity="0.35" />
+                                        <stop offset="80%" stop-color="#8b5cf6" stop-opacity="0.18" />
+                                        <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="pupilGradPhys" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#fef08a" />
+                                        <stop offset="70%" stop-color="#f59e0b" />
+                                        <stop offset="100%" stop-color="#b45309" />
+                                    </radialGradient>
+
+                                    <!-- 🧪 Chemistry Synthesis Auras & Pupils -->
+                                    <radialGradient id="auraGradChem" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.65" />
+                                        <stop offset="45%" stop-color="#3b82f6" stop-opacity="0.35" />
+                                        <stop offset="80%" stop-color="#6366f1" stop-opacity="0.18" />
+                                        <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="pupilGradChem" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#67e8f9" />
+                                        <stop offset="70%" stop-color="#0284c7" />
+                                        <stop offset="100%" stop-color="#1e40af" />
                                     </radialGradient>
 
                                     <!-- 👁️ Sentient Neural Aperture Pupil Gradient -->
@@ -956,8 +1118,8 @@
 
                                 <!-- 🧠 INTI UTAMA AI SAINS: Singularity Neural Nexus (Eksklusif Sains, Tanpa Unsur Robot) -->
                                 <g class="robot-main-body">
-                                    <!-- Aura Quantum Sphere Luar -->
-                                    <circle cx="140" cy="150" r="78" fill="url(#auraGrad)" />
+                                    <!-- Aura Quantum Sphere Luar (Dinamis Berubah Sesuai State Mode) -->
+                                    <circle cx="140" cy="150" r="78" fill="url(#auraGrad)" class="ai-core-aura transition-all duration-500" />
                                     
                                     <!-- Cincin Koordinat Polar Lab Sains -->
                                     <circle cx="140" cy="150" r="74" fill="none" stroke="url(#chemGrad)" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.6" />
@@ -1031,10 +1193,15 @@
                                         <circle cx="140" cy="178" r="1.2" fill="#ffffff" />
                                     </g>
 
+                                    <!-- 💥 Gelombang Kejut Fotonik Saat Klik (Quantum Shockwave Burst) -->
+                                    <circle id="ai-shockwave" cx="140" cy="150" r="65" fill="none" stroke="#00f5ff" stroke-width="2" opacity="0" pointer-events="none" />
+
                                     <!-- ⚛️ FISIKA: Inti Singularity Fusi Plasma & Horizon Peristiwa -->
-                                    <circle cx="140" cy="150" r="12" fill="url(#singularityGrad)" />
-                                    <ellipse cx="140" cy="150" rx="18" ry="6" fill="none" stroke="#fde047" stroke-width="1.6" opacity="0.9" transform="rotate(-15 140 150)" />
-                                    <circle cx="140" cy="150" r="5" fill="#ffffff" filter="url(#scienceGlow)" />
+                                    <g class="ai-singularity-core" style="transform-origin: 140px 150px;">
+                                        <circle cx="140" cy="150" r="12" fill="url(#singularityGrad)" />
+                                        <ellipse cx="140" cy="150" rx="18" ry="6" fill="none" stroke="#fde047" stroke-width="1.6" opacity="0.9" transform="rotate(-15 140 150)" />
+                                        <circle cx="140" cy="150" r="5" fill="#ffffff" filter="url(#scienceGlow)" />
+                                    </g>
 
                                     <!-- 🧠 APERTUR NEURAL AI: Sentient Digital Optics (Mata Berpikir Cerdas, Bukan Robot) -->
                                     <g class="robot-eyes-group">
@@ -1074,15 +1241,15 @@
                             </svg>
                         </div>
 
-                        <!-- Synthesis Science Typography -->
+                        <!-- Synthesis Science Typography & Interactive Mode Selectors -->
                         <div class="mt-4 text-center select-none">
                             <div class="flex items-center justify-center flex-wrap gap-2 text-xs font-mono font-bold tracking-wider mb-2">
-                                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono shadow-sm shadow-emerald-500/10">🧬 BIOLOGI SELULER</span>
-                                <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono shadow-sm shadow-amber-500/10">⚛️ FISIKA KUANTUM</span>
-                                <span class="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 text-[11px] font-mono shadow-sm shadow-sky-500/10">🧪 REAKSI KIMIA</span>
+                                <button type="button" id="badge-bio" class="science-badge px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono shadow-sm shadow-emerald-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">🧬 BIOLOGI SELULER</button>
+                                <button type="button" id="badge-phys" class="science-badge px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono shadow-sm shadow-amber-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">⚛️ FISIKA KUANTUM</button>
+                                <button type="button" id="badge-chem" class="science-badge px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 text-[11px] font-mono shadow-sm shadow-sky-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">🧪 REAKSI KIMIA</button>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-sky-300 to-amber-300">SYNTHESIS</h3>
-                            <p class="text-[11px] font-mono tracking-[0.35em] text-slate-400 uppercase mt-1">Autonomous Science Intelligence • Bioscience, Physics & Chemistry</p>
+                            <h3 id="synthesis-core-title" class="text-2xl md:text-3xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-sky-300 to-amber-300 transition-all duration-300">SYNTHESIS</h3>
+                            <p id="synthesis-core-desc" class="text-[11px] font-mono tracking-[0.35em] text-slate-400 uppercase mt-1 transition-all duration-300">Autonomous Science Intelligence • Bioscience, Physics & Chemistry</p>
                         </div>
                     </div>
                 </div>
