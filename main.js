@@ -195,12 +195,12 @@ const synthesisSpeechText = document.getElementById('synthesis-speech-text');
 const synthesisEmoji = document.getElementById('synthesis-emoji');
 
 const genZQuotes = [
-    { emoji: "🧬", text: "Yo! I'm Synthesis AI. Let's explore Malik's work! ✨" },
-    { emoji: "⚡", text: "Biotechnology + High-Perf Web = Pure Innovation! 🚀" },
-    { emoji: "🔥", text: "100% vibe-coded, research-backed & future ready!" },
-    { emoji: "💻", text: "Check out Malik's projects below — they're insane!" },
-    { emoji: "🏆", text: "Educator by day, builder & researcher 24/7." },
-    { emoji: "🚀", text: "Click me again for another quick cyber boost!" }
+    { emoji: "🧬", text: "Biologi: DNA bioscience & living system active! ✨" },
+    { emoji: "⚛️", text: "Fisika: Quantum atomic orbits rotating at 100%! 🚀" },
+    { emoji: "🧪", text: "Kimia: Benzene ring & covalent synthesis stable! ⚡" },
+    { emoji: "💻", text: "Tech: Web development & STEM innovation ready!" },
+    { emoji: "🔥", text: "Science Educator + Modern Web Developer! 🎓" },
+    { emoji: "⚡", text: "Touch me for a quantum bio-chemical recharge! 🔋" }
 ];
 let currentQuoteIndex = 0;
 let bubbleTimeout = null;

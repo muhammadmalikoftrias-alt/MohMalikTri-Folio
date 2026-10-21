@@ -180,12 +180,12 @@
         }
 
         .robot-arm-left {
-            transform-origin: 58px 148px;
+            transform-origin: 74px 152px;
             animation: armFloatLeft 3.8s ease-in-out infinite;
         }
 
         .robot-arm-right {
-            transform-origin: 142px 148px;
+            transform-origin: 186px 152px;
             animation: armFloatRight 4.2s ease-in-out infinite;
         }
 
@@ -216,18 +216,46 @@
             }
         }
 
-        .robot-core-orbit {
-            transform-origin: 100px 158px;
-            animation: coreOrbit 6s linear infinite;
+        /* ⚛️ Fisika: Orbit Atom Rotasi */
+        .robot-physics-orbits {
+            transform-origin: 130px 145px;
+            animation: orbitsRotate 12s linear infinite;
         }
 
-        @keyframes coreOrbit {
+        @keyframes orbitsRotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
+        /* 🧬 Biologi: DNA Double Helix Pulse */
+        .robot-dna-strand {
+            transform-origin: 130px 158px;
+            animation: dnaPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes dnaPulse {
+            0% {
+                filter: drop-shadow(0 0 3px rgba(16,185,129,0.5));
+                opacity: 0.85;
+            }
+            100% {
+                filter: drop-shadow(0 0 8px rgba(6,182,212,0.9));
+                opacity: 1;
+            }
+        }
+
+        /* 🧪 Kimia: Hexagon Benzena Covalent Pulse */
+        .robot-chem-hexagon {
+            animation: chemGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes chemGlow {
+            0% { filter: drop-shadow(0 0 4px rgba(0,210,255,0.4)); }
+            100% { filter: drop-shadow(0 0 10px rgba(59,130,246,0.8)); }
+        }
+
         .robot-eyes-group {
-            transform-origin: 100px 78px;
+            transform-origin: 130px 78px;
             transition: transform 0.12s ease;
         }
 
@@ -340,15 +368,27 @@
             <div
                 class="inline-flex flex-col lg:flex-row items-center gap-6 rounded-3xl border border-white/10 bg-slate-950/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 <div class="entry-robot-box flex items-center justify-center p-3 relative overflow-hidden">
-                    <svg id="overlay-robot-svg" viewBox="0 0 200 240" class="w-full h-full drop-shadow-[0_10px_25px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot overlay illustration">
+                    <svg id="overlay-robot-svg" viewBox="0 0 260 290" class="w-full h-full drop-shadow-[0_10px_25px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot overlay illustration">
                         <defs>
+                            <linearGradient id="chemGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00d2ff" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                            <linearGradient id="bioGradOverlay" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" />
+                                <stop offset="100%" stop-color="#06b6d4" />
+                            </linearGradient>
+                            <linearGradient id="physGradOverlay" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#f59e0b" />
+                                <stop offset="100%" stop-color="#fde047" />
+                            </linearGradient>
                             <radialGradient id="visorGradOverlay" cx="50%" cy="40%" r="60%">
                                 <stop offset="0%" stop-color="#0f172a" />
-                                <stop offset="70%" stop-color="#090d16" />
+                                <stop offset="70%" stop-color="#050a14" />
                                 <stop offset="100%" stop-color="#030712" />
                             </radialGradient>
                             <linearGradient id="armorGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="0%" stop-color="#f8fafc" />
                                 <stop offset="35%" stop-color="#e2e8f0" />
                                 <stop offset="70%" stop-color="#cbd5e1" />
                                 <stop offset="100%" stop-color="#94a3b8" />
@@ -357,15 +397,10 @@
                                 <stop offset="0%" stop-color="#334155" />
                                 <stop offset="100%" stop-color="#0f172a" />
                             </linearGradient>
-                            <linearGradient id="neonGlowOverlay" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#38bdf8" />
-                                <stop offset="50%" stop-color="#818cf8" />
-                                <stop offset="100%" stop-color="#c084fc" />
-                            </linearGradient>
                             <radialGradient id="pupilGradOverlay" cx="50%" cy="50%" r="50%">
                                 <stop offset="0%" stop-color="#ffffff" />
-                                <stop offset="35%" stop-color="#67e8f9" />
-                                <stop offset="75%" stop-color="#0284c7" />
+                                <stop offset="40%" stop-color="#38bdf8" />
+                                <stop offset="80%" stop-color="#0284c7" />
                                 <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
                             </radialGradient>
                             <filter id="robotGlowOverlay" x="-30%" y="-30%" width="160%" height="160%">
@@ -374,76 +409,115 @@
                             </filter>
                         </defs>
 
-                        <!-- Exhaust particles -->
-                        <g opacity="0.75">
-                            <circle cx="100" cy="208" r="3" fill="#38bdf8">
-                                <animate attributeName="cy" values="208;230;208" dur="2.4s" repeatCount="indefinite" />
+                        <!-- ⚛️ FISIKA: Orbit Atom -->
+                        <g class="robot-physics-orbits" transform="translate(130, 145)">
+                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(30)" opacity="0.65" stroke-dasharray="8 4" />
+                            <circle cx="97" cy="18" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="-97" cy="-18" r="3" fill="#f59e0b" />
+                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(90)" opacity="0.65" stroke-dasharray="8 4" />
+                            <circle cx="0" cy="112" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="0" cy="-112" r="3" fill="#f59e0b" />
+                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(150)" opacity="0.65" stroke-dasharray="8 4" />
+                            <circle cx="-97" cy="18" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="97" cy="-18" r="3" fill="#f59e0b" />
+                        </g>
+
+                        <!-- 💨 Thruster & Partikel Energi Kuantum -->
+                        <g opacity="0.8">
+                            <circle cx="130" cy="225" r="3" fill="#10b981">
+                                <animate attributeName="cy" values="225;260;225" dur="2.4s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
                             </circle>
-                            <circle cx="86" cy="214" r="2.2" fill="#818cf8">
-                                <animate attributeName="cy" values="214;232;214" dur="2.8s" repeatCount="indefinite" />
+                            <circle cx="114" cy="232" r="2.5" fill="#00d2ff">
+                                <animate attributeName="cy" values="232;264;232" dur="2.8s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
                             </circle>
-                            <circle cx="114" cy="212" r="2.5" fill="#34d399">
-                                <animate attributeName="cy" values="212;234;212" dur="2.1s" repeatCount="indefinite" />
+                            <circle cx="146" cy="230" r="2.8" fill="#fde047">
+                                <animate attributeName="cy" values="230;262;230" dur="2.1s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
                             </circle>
                         </g>
 
-                        <!-- Left Arm -->
+                        <!-- Lengan Kiri -->
                         <g class="robot-arm-left">
-                            <circle cx="58" cy="148" r="6" fill="url(#darkMetalOverlay)" stroke="#38bdf8" stroke-width="0.5" />
-                            <path d="M50 152 L42 178 C40 183, 48 186, 52 181 L60 156 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
-                            <path d="M47 160 L44 172" stroke="url(#neonGlowOverlay)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="43" cy="188" r="7" fill="url(#darkMetalOverlay)" stroke="#38bdf8" stroke-width="0.5" />
-                            <circle cx="43" cy="188" r="3.5" fill="#38bdf8" filter="url(#robotGlowOverlay)" />
+                            <circle cx="74" cy="152" r="6.5" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.75" />
+                            <path d="M66 156 L58 184 C56 189, 64 192, 68 187 L76 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
+                            <path d="M63 164 L60 178" stroke="url(#chemGradOverlay)" stroke-width="1.8" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="59" cy="194" r="7.5" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.75" />
+                            <circle cx="59" cy="194" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
                         </g>
 
-                        <!-- Right Arm -->
+                        <!-- Lengan Kanan -->
                         <g class="robot-arm-right">
-                            <circle cx="142" cy="148" r="6" fill="url(#darkMetalOverlay)" stroke="#818cf8" stroke-width="0.5" />
-                            <path d="M150 152 L158 178 C160 183, 152 186, 148 181 L140 156 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
-                            <path d="M153 160 L156 172" stroke="url(#neonGlowOverlay)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="157" cy="188" r="7" fill="url(#darkMetalOverlay)" stroke="#818cf8" stroke-width="0.5" />
-                            <circle cx="157" cy="188" r="3.5" fill="#818cf8" filter="url(#robotGlowOverlay)" />
+                            <circle cx="186" cy="152" r="6.5" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.75" />
+                            <path d="M194 156 L202 184 C204 189, 196 192, 192 187 L184 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
+                            <path d="M197 164 L200 178" stroke="url(#bioGradOverlay)" stroke-width="1.8" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="201" cy="194" r="7.5" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.75" />
+                            <circle cx="201" cy="194" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
                         </g>
 
-                        <!-- Main Body -->
+                        <!-- Badan Utama -->
                         <g class="robot-main-body">
-                            <rect x="92" y="112" width="16" height="12" rx="4" fill="url(#darkMetalOverlay)" stroke="#475569" stroke-width="0.5" />
-                            <path d="M52 135 C52 125, 68 123, 72 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
-                            <path d="M148 135 C148 125, 132 123, 128 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
-                            <path d="M85 190 Q100 228 115 190 Z" fill="url(#neonGlowOverlay)" filter="url(#robotGlowOverlay)" opacity="0.9">
-                                <animate attributeName="opacity" values="0.75;1;0.75" dur="0.12s" repeatCount="indefinite" />
+                            <rect x="122" y="112" width="16" height="12" rx="4" fill="url(#darkMetalOverlay)" stroke="#475569" stroke-width="0.5" />
+                            <path d="M78 135 C78 125, 96 123, 100 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
+                            <path d="M182 135 C182 125, 164 123, 160 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
+                            <path d="M115 195 Q130 236 145 195 Z" fill="url(#chemGradOverlay)" filter="url(#robotGlowOverlay)" opacity="0.95">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="0.12s" repeatCount="indefinite" />
                             </path>
-                            <path d="M92 190 Q100 212 108 190 Z" fill="#ffffff" filter="url(#robotGlowOverlay)" opacity="0.95" />
-                            <path d="M70 132 L130 132 L120 186 C120 191, 80 191, 80 186 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.75" />
-                            <path d="M82 138 L118 138 L110 180 C110 183, 90 183, 90 180 Z" fill="url(#darkMetalOverlay)" />
-                            <ellipse cx="100" cy="158" rx="14" ry="5" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.7" transform="rotate(-15 100 158)" class="robot-core-orbit" />
-                            <circle cx="100" cy="158" r="9" fill="url(#neonGlowOverlay)" filter="url(#robotGlowOverlay)" />
-                            <circle cx="100" cy="158" r="4.5" fill="#ffffff" />
-                            <rect x="33" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
-                            <rect x="159" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
-                            <line x1="37" y1="65" x2="30" y2="46" stroke="url(#neonGlowOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <line x1="163" y1="65" x2="170" y2="46" stroke="url(#neonGlowOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="30" cy="46" r="3" fill="#ffffff" filter="url(#robotGlowOverlay)" />
-                            <circle cx="170" cy="46" r="3" fill="#ffffff" filter="url(#robotGlowOverlay)" />
-                            <rect x="38" y="42" width="124" height="76" rx="38" fill="url(#armorGradOverlay)" stroke="#f1f5f9" stroke-width="0.75" />
-                            <rect x="46" y="49" width="108" height="62" rx="30" fill="url(#visorGradOverlay)" stroke="#1e293b" stroke-width="1" />
-                            <rect x="48" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#neonGlowOverlay)" stroke-width="1" opacity="0.45" />
+                            <path d="M122 195 Q130 218 138 195 Z" fill="#ffffff" filter="url(#robotGlowOverlay)" opacity="0.95" />
+                            <path d="M96 132 L164 132 L154 192 C154 197, 106 197, 106 192 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.75" />
+                            
+                            <!-- 🧪 KIMIA: Hexagon Benzena -->
+                            <path class="robot-chem-hexagon" d="M 130 118 L 164 138 L 164 178 L 130 198 L 96 178 L 96 138 Z" fill="#0d1527" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linejoin="round" />
+                            <circle cx="130" cy="118" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
+                            <circle cx="164" cy="138" r="3.5" fill="#3b82f6" />
+                            <circle cx="164" cy="178" r="3.5" fill="#00d2ff" />
+                            <circle cx="130" cy="198" r="3.5" fill="#3b82f6" filter="url(#robotGlowOverlay)" />
+                            <circle cx="96" cy="178" r="3.5" fill="#00d2ff" />
+                            <circle cx="96" cy="138" r="3.5" fill="#3b82f6" />
+
+                            <!-- 🧬 BIOLOGI: DNA Double Helix -->
+                            <rect x="114" y="128" width="32" height="60" rx="16" fill="rgba(6, 78, 59, 0.45)" stroke="url(#bioGradOverlay)" stroke-width="1.2" />
+                            <g class="robot-dna-strand">
+                                <path d="M 123 134 Q 137 146 123 158 T 123 182" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
+                                <path d="M 137 134 Q 123 146 137 158 T 137 182" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
+                                <line x1="125" y1="139" x2="135" y2="139" stroke="#10b981" stroke-width="1.5" />
+                                <line x1="123" y1="148" x2="137" y2="148" stroke="#06b6d4" stroke-width="1.5" />
+                                <line x1="125" y1="158" x2="135" y2="158" stroke="#10b981" stroke-width="1.5" />
+                                <line x1="123" y1="168" x2="137" y2="168" stroke="#06b6d4" stroke-width="1.5" />
+                                <line x1="125" y1="177" x2="135" y2="177" stroke="#10b981" stroke-width="1.5" />
+                            </g>
+
+                            <!-- ⚛️ FISIKA: Cincin Kuantum -->
+                            <ellipse cx="130" cy="158" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 130 158)" />
+                            <circle cx="130" cy="158" r="4.5" fill="#ffffff" filter="url(#robotGlowOverlay)" />
+
+                            <!-- Antena Molekuler -->
+                            <rect x="63" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <rect x="189" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <line x1="67" y1="65" x2="60" y2="46" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <line x1="193" y1="65" x2="200" y2="46" stroke="url(#bioGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="60" cy="46" r="3.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="200" cy="46" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
+
+                            <!-- Helm Robot -->
+                            <rect x="68" y="42" width="124" height="76" rx="38" fill="url(#armorGradOverlay)" stroke="#f1f5f9" stroke-width="0.75" />
+                            <rect x="76" y="49" width="108" height="62" rx="30" fill="url(#visorGradOverlay)" stroke="#1e293b" stroke-width="1" />
+                            <rect x="78" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGradOverlay)" stroke-width="1" opacity="0.45" />
+
                             <g class="robot-eyes-group">
-                                <ellipse cx="78" cy="78" rx="16" ry="12" fill="#020617" />
-                                <ellipse cx="122" cy="78" rx="16" ry="12" fill="#020617" />
+                                <ellipse cx="108" cy="78" rx="16" ry="12" fill="#020617" />
+                                <ellipse cx="152" cy="78" rx="16" ry="12" fill="#020617" />
                                 <g class="overlay-pupil-left">
-                                    <circle cx="78" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
-                                    <circle cx="79.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                    <circle cx="108" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="109.5" cy="76.5" r="2.2" fill="#ffffff" />
                                 </g>
                                 <g class="overlay-pupil-right">
-                                    <circle cx="122" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
-                                    <circle cx="123.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                    <circle cx="152" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="153.5" cy="76.5" r="2.2" fill="#ffffff" />
                                 </g>
                             </g>
-                            <path d="M 52 64 C 70 53, 110 53, 148 64 C 130 57, 70 57, 52 64 Z" fill="#ffffff" opacity="0.25" />
+                            <path d="M 82 64 C 100 53, 140 53, 178 64 C 160 57, 100 57, 82 64 Z" fill="#ffffff" opacity="0.25" />
                         </g>
                     </svg>
                 </div>
@@ -555,149 +629,220 @@
                         </div>
 
                         <!-- Interactive 3D Robot Wrapper -->
-                        <div id="robot-3d-wrapper" class="robot-interactive-wrapper w-full max-w-[320px] md:max-w-[360px] aspect-square flex items-center justify-center relative select-none">
+                        <div id="robot-3d-wrapper" class="robot-interactive-wrapper w-full max-w-[340px] md:max-w-[380px] aspect-square flex items-center justify-center relative select-none">
                             <!-- Background Cyber Glow / Halo -->
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-blue-500/10 to-purple-500/20 blur-2xl pointer-events-none transform scale-90"></div>
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/20 via-sky-500/15 to-amber-500/20 blur-2xl pointer-events-none transform scale-90"></div>
                             
-                            <svg id="robot-svg" viewBox="0 0 200 240" class="w-full h-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Synthesis AI Robot Companion">
+                            <svg id="robot-svg" viewBox="0 0 260 290" class="w-full h-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Synthesis AI - Bio Physics Chemistry Science Robot">
                                 <defs>
+                                    <!-- 🧪 KIMIA GRADIENT -->
+                                    <linearGradient id="chemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00d2ff" />
+                                        <stop offset="100%" stop-color="#3b82f6" />
+                                    </linearGradient>
+
+                                    <!-- 🧬 BIOLOGI GRADIENT -->
+                                    <linearGradient id="bioGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#10b981" />
+                                        <stop offset="100%" stop-color="#06b6d4" />
+                                    </linearGradient>
+
+                                    <!-- ⚛️ FISIKA GRADIENT -->
+                                    <linearGradient id="physGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#f59e0b" />
+                                        <stop offset="100%" stop-color="#fde047" />
+                                    </linearGradient>
+
+                                    <!-- Visor gradient -->
                                     <radialGradient id="visorGrad" cx="50%" cy="40%" r="60%">
                                         <stop offset="0%" stop-color="#0f172a" />
-                                        <stop offset="70%" stop-color="#090d16" />
-                                        <stop offset="100%" stop-color="#030712" />
+                                        <stop offset="70%" stop-color="#050a14" />
+                                        <stop offset="100%" stop-color="#020617" />
                                     </radialGradient>
+
+                                    <!-- Metallic armor gradient -->
                                     <linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="0%" stop-color="#f8fafc" />
                                         <stop offset="35%" stop-color="#e2e8f0" />
                                         <stop offset="70%" stop-color="#cbd5e1" />
                                         <stop offset="100%" stop-color="#94a3b8" />
                                     </linearGradient>
+
                                     <linearGradient id="darkMetal" x1="0%" y1="0%" x2="0%" y2="100%">
                                         <stop offset="0%" stop-color="#334155" />
                                         <stop offset="100%" stop-color="#0f172a" />
                                     </linearGradient>
-                                    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#38bdf8" />
-                                        <stop offset="50%" stop-color="#818cf8" />
-                                        <stop offset="100%" stop-color="#c084fc" />
-                                    </linearGradient>
+
                                     <radialGradient id="pupilGrad" cx="50%" cy="50%" r="50%">
                                         <stop offset="0%" stop-color="#ffffff" />
-                                        <stop offset="35%" stop-color="#67e8f9" />
-                                        <stop offset="75%" stop-color="#0284c7" />
+                                        <stop offset="40%" stop-color="#38bdf8" />
+                                        <stop offset="80%" stop-color="#0284c7" />
                                         <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
                                     </radialGradient>
-                                    <filter id="robotGlow" x="-30%" y="-30%" width="160%" height="160%">
-                                        <feGaussianBlur stdDeviation="4" result="blur" />
+
+                                    <filter id="scienceGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="3.5" result="blur" />
                                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                                     </filter>
                                 </defs>
 
-                                <!-- Exhaust particles underneath thruster -->
-                                <g class="robot-exhaust-particles" opacity="0.75">
-                                    <circle cx="100" cy="208" r="3" fill="#38bdf8">
-                                        <animate attributeName="cy" values="208;230;208" dur="2.4s" repeatCount="indefinite" />
+                                <!-- ⚛️ FISIKA: Orbit Atom Mengelilingi Robot -->
+                                <g class="robot-physics-orbits" transform="translate(130, 145)">
+                                    <!-- Orbit 1 (30 deg) -->
+                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(30)" opacity="0.65" stroke-dasharray="8 4" />
+                                    <circle cx="97" cy="18" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="-97" cy="-18" r="3" fill="#f59e0b" />
+
+                                    <!-- Orbit 2 (90 deg) -->
+                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(90)" opacity="0.65" stroke-dasharray="8 4" />
+                                    <circle cx="0" cy="112" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="0" cy="-112" r="3" fill="#f59e0b" />
+
+                                    <!-- Orbit 3 (150 deg) -->
+                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(150)" opacity="0.65" stroke-dasharray="8 4" />
+                                    <circle cx="-97" cy="18" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="97" cy="-18" r="3" fill="#f59e0b" />
+                                </g>
+
+                                <!-- 💨 Thruster & Partikel Energi Kuantum -->
+                                <g opacity="0.8">
+                                    <!-- Partikel Melayang (3 Warna: Cyan Kimia, Hijau Biologi, Emas Fisika) -->
+                                    <circle cx="130" cy="225" r="3" fill="#10b981">
+                                        <animate attributeName="cy" values="225;260;225" dur="2.4s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
-                                        <animate attributeName="r" values="3;1.5;3" dur="2.4s" repeatCount="indefinite" />
                                     </circle>
-                                    <circle cx="86" cy="214" r="2.2" fill="#818cf8">
-                                        <animate attributeName="cy" values="214;232;214" dur="2.8s" repeatCount="indefinite" />
+                                    <circle cx="114" cy="232" r="2.5" fill="#00d2ff">
+                                        <animate attributeName="cy" values="232;264;232" dur="2.8s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
                                     </circle>
-                                    <circle cx="114" cy="212" r="2.5" fill="#34d399">
-                                        <animate attributeName="cy" values="212;234;212" dur="2.1s" repeatCount="indefinite" />
+                                    <circle cx="146" cy="230" r="2.8" fill="#fde047">
+                                        <animate attributeName="cy" values="230;262;230" dur="2.1s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
                                     </circle>
                                 </g>
 
-                                <!-- Floating Left Arm -->
+                                <!-- 🤖 Lengan Kiri Robot (Mengambang Independen) -->
                                 <g class="robot-arm-left">
-                                    <circle cx="58" cy="148" r="6" fill="url(#darkMetal)" stroke="#38bdf8" stroke-width="0.5" />
-                                    <path d="M50 152 L42 178 C40 183, 48 186, 52 181 L60 156 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
-                                    <path d="M47 160 L44 172" stroke="url(#neonGlow)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlow)" />
-                                    <circle cx="43" cy="188" r="7" fill="url(#darkMetal)" stroke="#38bdf8" stroke-width="0.5" />
-                                    <circle cx="43" cy="188" r="3.5" fill="#38bdf8" filter="url(#robotGlow)" />
+                                    <circle cx="74" cy="152" r="6.5" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.75" />
+                                    <path d="M66 156 L58 184 C56 189, 64 192, 68 187 L76 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
+                                    <!-- Garis Ikatan Kimia Pada Lengan -->
+                                    <path d="M63 164 L60 178" stroke="url(#chemGrad)" stroke-width="1.8" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="59" cy="194" r="7.5" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.75" />
+                                    <circle cx="59" cy="194" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
                                 </g>
 
-                                <!-- Floating Right Arm -->
+                                <!-- 🤖 Lengan Kanan Robot (Mengambang Independen) -->
                                 <g class="robot-arm-right">
-                                    <circle cx="142" cy="148" r="6" fill="url(#darkMetal)" stroke="#818cf8" stroke-width="0.5" />
-                                    <path d="M150 152 L158 178 C160 183, 152 186, 148 181 L140 156 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
-                                    <path d="M153 160 L156 172" stroke="url(#neonGlow)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlow)" />
-                                    <circle cx="157" cy="188" r="7" fill="url(#darkMetal)" stroke="#818cf8" stroke-width="0.5" />
-                                    <circle cx="157" cy="188" r="3.5" fill="#818cf8" filter="url(#robotGlow)" />
+                                    <circle cx="186" cy="152" r="6.5" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.75" />
+                                    <path d="M194 156 L202 184 C204 189, 196 192, 192 187 L184 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
+                                    <!-- Garis Ikatan Kimia Pada Lengan -->
+                                    <path d="M197 164 L200 178" stroke="url(#bioGrad)" stroke-width="1.8" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="201" cy="194" r="7.5" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.75" />
+                                    <circle cx="201" cy="194" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
                                 </g>
 
-                                <!-- Main Body Group -->
+                                <!-- 🤖 BADAN UTAMA ROBOT (Melayang & 3D Tilt) -->
                                 <g class="robot-main-body">
-                                    <!-- Neck connector -->
-                                    <rect x="92" y="112" width="16" height="12" rx="4" fill="url(#darkMetal)" stroke="#475569" stroke-width="0.5" />
+                                    <!-- Leher Metal -->
+                                    <rect x="122" y="112" width="16" height="12" rx="4" fill="url(#darkMetal)" stroke="#475569" stroke-width="0.5" />
 
-                                    <!-- Shoulder armor pads -->
-                                    <path d="M52 135 C52 125, 68 123, 72 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
-                                    <path d="M148 135 C148 125, 132 123, 128 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
+                                    <!-- Pelindung Bahu -->
+                                    <path d="M78 135 C78 125, 96 123, 100 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
+                                    <path d="M182 135 C182 125, 164 123, 160 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
 
-                                    <!-- Thruster cone / jet flame -->
-                                    <path d="M85 190 Q100 228 115 190 Z" fill="url(#neonGlow)" filter="url(#robotGlow)" opacity="0.9">
-                                        <animate attributeName="opacity" values="0.75;1;0.75" dur="0.12s" repeatCount="indefinite" />
+                                    <!-- Semburan Api Thruster Bawah -->
+                                    <path d="M115 195 Q130 236 145 195 Z" fill="url(#chemGrad)" filter="url(#scienceGlow)" opacity="0.95">
+                                        <animate attributeName="opacity" values="0.8;1;0.8" dur="0.12s" repeatCount="indefinite" />
                                     </path>
-                                    <path d="M92 190 Q100 212 108 190 Z" fill="#ffffff" filter="url(#robotGlow)" opacity="0.95" />
+                                    <path d="M122 195 Q130 218 138 195 Z" fill="#ffffff" filter="url(#scienceGlow)" opacity="0.95" />
 
-                                    <!-- Torso armor outer -->
-                                    <path d="M70 132 L130 132 L120 186 C120 191, 80 191, 80 186 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.75" />
-                                    <!-- Torso dark tech core recessed cavity -->
-                                    <path d="M82 138 L118 138 L110 180 C110 183, 90 183, 90 180 Z" fill="url(#darkMetal)" />
+                                    <!-- Torso Pelindung Luar -->
+                                    <path d="M96 132 L164 132 L154 192 C154 197, 106 197, 106 192 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.75" />
+                                    
+                                    <!-- 🧪 KIMIA: Cincin Benzena Hexagon (C6H6) Pada Dada Robot -->
+                                    <path class="robot-chem-hexagon" d="M 130 118 L 164 138 L 164 178 L 130 198 L 96 178 L 96 138 Z" fill="#0d1527" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linejoin="round" />
+                                    <!-- Ikatan Kovalen Tambahan & Node Atom Kimia -->
+                                    <circle cx="130" cy="118" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
+                                    <circle cx="164" cy="138" r="3.5" fill="#3b82f6" />
+                                    <circle cx="164" cy="178" r="3.5" fill="#00d2ff" />
+                                    <circle cx="130" cy="198" r="3.5" fill="#3b82f6" filter="url(#scienceGlow)" />
+                                    <circle cx="96" cy="178" r="3.5" fill="#00d2ff" />
+                                    <circle cx="96" cy="138" r="3.5" fill="#3b82f6" />
 
-                                    <!-- Synthesis Chest Arc Reactor with glowing orbital ring -->
-                                    <ellipse cx="100" cy="158" rx="14" ry="5" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.7" transform="rotate(-15 100 158)" class="robot-core-orbit" />
-                                    <circle cx="100" cy="158" r="9" fill="url(#neonGlow)" filter="url(#robotGlow)" class="robot-core-pulse" />
-                                    <circle cx="100" cy="158" r="4.5" fill="#ffffff" />
+                                    <!-- 🧬 BIOLOGI: Tabung Bio-Reaktor DNA Double Helix -->
+                                    <rect x="114" y="128" width="32" height="60" rx="16" fill="rgba(6, 78, 59, 0.45)" stroke="url(#bioGrad)" stroke-width="1.2" />
+                                    
+                                    <!-- Untaian Ganda DNA (Double Helix Strands) -->
+                                    <g class="robot-dna-strand">
+                                        <!-- Untaian DNA 1 -->
+                                        <path d="M 123 134 Q 137 146 123 158 T 123 182" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
+                                        <!-- Untaian DNA 2 -->
+                                        <path d="M 137 134 Q 123 146 137 158 T 137 182" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
+                                        
+                                        <!-- Anak Tangga Pasangan Basa DNA (Base Pairs A-T, G-C) -->
+                                        <line x1="125" y1="139" x2="135" y2="139" stroke="#10b981" stroke-width="1.5" />
+                                        <line x1="123" y1="148" x2="137" y2="148" stroke="#06b6d4" stroke-width="1.5" />
+                                        <line x1="125" y1="158" x2="135" y2="158" stroke="#10b981" stroke-width="1.5" />
+                                        <line x1="123" y1="168" x2="137" y2="168" stroke="#06b6d4" stroke-width="1.5" />
+                                        <line x1="125" y1="177" x2="135" y2="177" stroke="#10b981" stroke-width="1.5" />
+                                    </g>
 
-                                    <!-- Antennas / cyber ears -->
-                                    <rect x="33" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
-                                    <rect x="159" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
-                                    <line x1="37" y1="65" x2="30" y2="46" stroke="url(#neonGlow)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlow)" />
-                                    <line x1="163" y1="65" x2="170" y2="46" stroke="url(#neonGlow)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlow)" />
-                                    <circle cx="30" cy="46" r="3" fill="#ffffff" filter="url(#robotGlow)" />
-                                    <circle cx="170" cy="46" r="3" fill="#ffffff" filter="url(#robotGlow)" />
+                                    <!-- ⚛️ FISIKA: Cincin Kuantum Inti Tengah -->
+                                    <ellipse cx="130" cy="158" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 130 158)" />
+                                    <circle cx="130" cy="158" r="4.5" fill="#ffffff" filter="url(#scienceGlow)" />
 
-                                    <!-- Head outer helmet -->
-                                    <rect x="38" y="42" width="124" height="76" rx="38" fill="url(#armorGrad)" stroke="#f1f5f9" stroke-width="0.75" />
+                                    <!-- Antena Sensor Sains Kiri & Kanan (Probe Molekuler) -->
+                                    <rect x="63" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <rect x="189" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <line x1="67" y1="65" x2="60" y2="46" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <line x1="193" y1="65" x2="200" y2="46" stroke="url(#bioGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="60" cy="46" r="3.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="200" cy="46" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
 
-                                    <!-- Visor screen frame -->
-                                    <rect x="46" y="49" width="108" height="62" rx="30" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="1" />
-                                    <rect x="48" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#neonGlow)" stroke-width="1" opacity="0.45" />
+                                    <!-- Helm Robot Luar -->
+                                    <rect x="68" y="42" width="124" height="76" rx="38" fill="url(#armorGrad)" stroke="#f1f5f9" stroke-width="0.75" />
 
-                                    <!-- Eyes (left and right eye sockets & pupils) -->
+                                    <!-- Frame Kaca Visor -->
+                                    <rect x="76" y="49" width="108" height="62" rx="30" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="1" />
+                                    <rect x="78" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGrad)" stroke-width="1" opacity="0.45" />
+
+                                    <!-- Mata Visor (Mata Kiri & Kanan Mengikuti Kursor) -->
                                     <g class="robot-eyes-group">
-                                        <!-- Left eye socket -->
-                                        <ellipse cx="78" cy="78" rx="16" ry="12" fill="#020617" />
-                                        <!-- Right eye socket -->
-                                        <ellipse cx="122" cy="78" rx="16" ry="12" fill="#020617" />
+                                        <!-- Rongga Mata Kiri -->
+                                        <ellipse cx="108" cy="78" rx="16" ry="12" fill="#020617" />
+                                        <!-- Rongga Mata Kanan -->
+                                        <ellipse cx="152" cy="78" rx="16" ry="12" fill="#020617" />
 
-                                        <!-- Left pupil (follows cursor) -->
+                                        <!-- Pupil Kiri (Interaktif Mengikuti Kursor) -->
                                         <g class="robot-pupil-left-group">
-                                            <circle cx="78" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#robotGlow)" class="robot-pupil" />
-                                            <circle cx="79.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                            <circle cx="108" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
+                                            <circle cx="109.5" cy="76.5" r="2.2" fill="#ffffff" />
                                         </g>
 
-                                        <!-- Right pupil (follows cursor) -->
+                                        <!-- Pupil Kanan (Interaktif Mengikuti Kursor) -->
                                         <g class="robot-pupil-right-group">
-                                            <circle cx="122" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#robotGlow)" class="robot-pupil" />
-                                            <circle cx="123.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                            <circle cx="152" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
+                                            <circle cx="153.5" cy="76.5" r="2.2" fill="#ffffff" />
                                         </g>
                                     </g>
 
-                                    <!-- Glossy curved glass reflection on visor -->
-                                    <path d="M 52 64 C 70 53, 110 53, 148 64 C 130 57, 70 57, 52 64 Z" fill="#ffffff" opacity="0.25" />
+                                    <!-- Kilau Refleksi Kaca Visor Lengkung -->
+                                    <path d="M 82 64 C 100 53, 140 53, 178 64 C 160 57, 100 57, 82 64 Z" fill="#ffffff" opacity="0.25" />
                                 </g>
                             </svg>
                         </div>
 
-                        <!-- Synthesis Typography -->
+                        <!-- Synthesis Science Typography -->
                         <div class="mt-4 text-center select-none">
-                            <h3 class="text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-400">SYNTHESIS</h3>
-                            <p class="text-xs font-mono tracking-[0.3em] text-slate-400 uppercase mt-1">Intelligent Bioscience & Code Companion</p>
+                            <div class="flex items-center justify-center gap-2.5 text-xs font-mono font-bold tracking-wider mb-1">
+                                <span class="text-emerald-400">🧬 BIOLOGI</span>
+                                <span class="text-slate-600">•</span>
+                                <span class="text-amber-400">⚛️ FISIKA</span>
+                                <span class="text-slate-600">•</span>
+                                <span class="text-sky-400">🧪 KIMIA</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-sky-300 to-amber-300">SYNTHESIS</h3>
+                            <p class="text-xs font-mono tracking-[0.3em] text-slate-400 uppercase mt-1">Intelligent Bioscience, Physics & Chemistry AI</p>
                         </div>
                     </div>
                 </div>
