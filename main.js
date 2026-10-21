@@ -195,12 +195,13 @@ const synthesisSpeechText = document.getElementById('synthesis-speech-text');
 const synthesisEmoji = document.getElementById('synthesis-emoji');
 
 const genZQuotes = [
-    { emoji: "🧬", text: "Biologi: DNA bioscience & living system active! ✨" },
-    { emoji: "⚛️", text: "Fisika: Quantum atomic orbits rotating at 100%! 🚀" },
-    { emoji: "🧪", text: "Kimia: Benzene ring & covalent synthesis stable! ⚡" },
-    { emoji: "💻", text: "Tech: Web development & STEM innovation ready!" },
-    { emoji: "🔥", text: "Science Educator + Modern Web Developer! 🎓" },
-    { emoji: "⚡", text: "Touch me for a quantum bio-chemical recharge! 🔋" }
+    { emoji: "🧬", text: "No cap, sekuensing DNA di portfolio Malik literally 100/100 slay! ✨" },
+    { emoji: "⚛️", text: "Quantum entanglement locked in! Zero entropy, pure science rizz ⚡🔬" },
+    { emoji: "🧪", text: "Resonansi Benzena C₆H₆ stabil! We are literally cooking clean code 🍳🧪" },
+    { emoji: "🌌", text: "Lowkey vibrating at Heisenberg uncertainty limits... smooth AF! 🛸" },
+    { emoji: "🔬", text: "Mitosis seluler selesai, siap deploy inovasi edukasi sains ber-impact! 🚀" },
+    { emoji: "🎓", text: "Science Educator x Tech Innovator energy is totally elite! 🔥" },
+    { emoji: "⚡", text: "Tap me lagi buat eksitasi elektron & discharge foton kuantum! 💥🔋" }
 ];
 let currentQuoteIndex = 0;
 let bubbleTimeout = null;
@@ -214,7 +215,7 @@ function showSpeechBubble(quote) {
     clearTimeout(bubbleTimeout);
     bubbleTimeout = setTimeout(() => {
         synthesisBubble.classList.remove('active');
-    }, 4500);
+    }, 5000);
 }
 
 function nextSpeechBubble() {
@@ -222,7 +223,7 @@ function nextSpeechBubble() {
     showSpeechBubble(genZQuotes[currentQuoteIndex]);
 }
 
-// Playful Gen-Z Cyber Chime via Web Audio API
+// Playful & Elegant Gen-Z Quantum Chime via Web Audio API (Crystal Harmonic Chord)
 function playCyberChime() {
     try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -230,21 +231,22 @@ function playCyberChime() {
         const ctx = new AudioCtx();
         if (ctx.state === 'suspended') ctx.resume();
 
-        const notes = [587.33, 880, 1174.66]; // D5, A5, D6 sci-fi arpeggio
+        // Crystal quantum chords: C5 (523.25Hz), E5 (659.25Hz), G5 (783.99Hz), B5 (987.77Hz), C6 (1046.5Hz)
+        const notes = [523.25, 659.25, 783.99, 987.77, 1046.5];
         notes.forEach((freq, i) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.05);
 
-            gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.08);
-            gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + i * 0.08 + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.08 + 0.25);
+            gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.07, ctx.currentTime + i * 0.05 + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.05 + 0.35);
 
             osc.connect(gain);
             gain.connect(ctx.destination);
-            osc.start(ctx.currentTime + i * 0.08);
-            osc.stop(ctx.currentTime + i * 0.08 + 0.26);
+            osc.start(ctx.currentTime + i * 0.05);
+            osc.stop(ctx.currentTime + i * 0.05 + 0.36);
         });
     } catch (e) {
         // Fallback silently if audio blocked by browser policy
