@@ -176,16 +176,16 @@
 
         .robot-main-body {
             animation: robotFloat 4.5s ease-in-out infinite;
-            transform-origin: center center;
+            transform-origin: 140px 150px;
         }
 
         .robot-arm-left {
-            transform-origin: 74px 152px;
+            transform-origin: 82px 152px;
             animation: armFloatLeft 3.8s ease-in-out infinite;
         }
 
         .robot-arm-right {
-            transform-origin: 186px 152px;
+            transform-origin: 198px 152px;
             animation: armFloatRight 4.2s ease-in-out infinite;
         }
 
@@ -218,7 +218,7 @@
 
         /* ⚛️ Fisika: Orbit Atom Rotasi */
         .robot-physics-orbits {
-            transform-origin: 130px 145px;
+            transform-origin: 140px 150px;
             animation: orbitsRotate 12s linear infinite;
         }
 
@@ -229,7 +229,7 @@
 
         /* 🧬 Biologi: DNA Double Helix Pulse */
         .robot-dna-strand {
-            transform-origin: 130px 158px;
+            transform-origin: 140px 159px;
             animation: dnaPulse 3s ease-in-out infinite alternate;
         }
 
@@ -255,7 +255,7 @@
         }
 
         .robot-eyes-group {
-            transform-origin: 130px 78px;
+            transform-origin: 140px 78px;
             transition: transform 0.12s ease;
         }
 
@@ -368,7 +368,7 @@
             <div
                 class="inline-flex flex-col lg:flex-row items-center gap-6 rounded-3xl border border-white/10 bg-slate-950/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 <div class="entry-robot-box flex items-center justify-center p-3 relative overflow-hidden">
-                    <svg id="overlay-robot-svg" viewBox="0 0 260 290" class="w-full h-full drop-shadow-[0_10px_25px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot overlay illustration">
+                    <svg id="overlay-robot-svg" viewBox="0 0 280 300" class="w-full h-full drop-shadow-[0_10px_25px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot overlay illustration">
                         <defs>
                             <linearGradient id="chemGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#00d2ff" />
@@ -385,11 +385,11 @@
                             <radialGradient id="visorGradOverlay" cx="50%" cy="40%" r="60%">
                                 <stop offset="0%" stop-color="#0f172a" />
                                 <stop offset="70%" stop-color="#050a14" />
-                                <stop offset="100%" stop-color="#030712" />
+                                <stop offset="100%" stop-color="#020617" />
                             </radialGradient>
                             <linearGradient id="armorGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#f8fafc" />
-                                <stop offset="35%" stop-color="#e2e8f0" />
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="35%" stop-color="#f1f5f9" />
                                 <stop offset="70%" stop-color="#cbd5e1" />
                                 <stop offset="100%" stop-color="#94a3b8" />
                             </linearGradient>
@@ -409,115 +409,137 @@
                             </filter>
                         </defs>
 
-                        <!-- ⚛️ FISIKA: Orbit Atom -->
-                        <g class="robot-physics-orbits" transform="translate(130, 145)">
-                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(30)" opacity="0.65" stroke-dasharray="8 4" />
-                            <circle cx="97" cy="18" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
-                            <circle cx="-97" cy="-18" r="3" fill="#f59e0b" />
-                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(90)" opacity="0.65" stroke-dasharray="8 4" />
-                            <circle cx="0" cy="112" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
-                            <circle cx="0" cy="-112" r="3" fill="#f59e0b" />
-                            <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(150)" opacity="0.65" stroke-dasharray="8 4" />
-                            <circle cx="-97" cy="18" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
-                            <circle cx="97" cy="-18" r="3" fill="#f59e0b" />
+                        <!-- ⚛️ FISIKA: Cincin Orbit Medan Atom Bohr -->
+                        <g class="robot-physics-orbits" transform="translate(140, 150)">
+                            <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(30)" opacity="0.7" stroke-dasharray="8 5" />
+                            <circle cx="93" cy="17" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="-93" cy="-17" r="3" fill="#f59e0b" />
+                            <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(90)" opacity="0.7" stroke-dasharray="8 5" />
+                            <circle cx="0" cy="108" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="0" cy="-108" r="3" fill="#f59e0b" />
+                            <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGradOverlay)" stroke-width="1.8" transform="rotate(150)" opacity="0.7" stroke-dasharray="8 5" />
+                            <circle cx="-93" cy="17" r="4.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="93" cy="-17" r="3" fill="#f59e0b" />
                         </g>
 
-                        <!-- 💨 Thruster & Partikel Energi Kuantum -->
+                        <!-- 💨 Propulsi Bawah & Partikel Energi Kuantum -->
                         <g opacity="0.8">
-                            <circle cx="130" cy="225" r="3" fill="#10b981">
-                                <animate attributeName="cy" values="225;260;225" dur="2.4s" repeatCount="indefinite" />
+                            <circle cx="140" cy="226" r="3" fill="#10b981">
+                                <animate attributeName="cy" values="226;265;226" dur="2.4s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
                             </circle>
-                            <circle cx="114" cy="232" r="2.5" fill="#00d2ff">
-                                <animate attributeName="cy" values="232;264;232" dur="2.8s" repeatCount="indefinite" />
+                            <circle cx="124" cy="233" r="2.5" fill="#00d2ff">
+                                <animate attributeName="cy" values="233;268;233" dur="2.8s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
                             </circle>
-                            <circle cx="146" cy="230" r="2.8" fill="#fde047">
-                                <animate attributeName="cy" values="230;262;230" dur="2.1s" repeatCount="indefinite" />
+                            <circle cx="156" cy="231" r="2.8" fill="#fde047">
+                                <animate attributeName="cy" values="231;266;231" dur="2.1s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
                             </circle>
                         </g>
 
-                        <!-- Lengan Kiri -->
+                        <!-- 🤖 Lengan Kiri Robot -->
                         <g class="robot-arm-left">
-                            <circle cx="74" cy="152" r="6.5" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.75" />
-                            <path d="M66 156 L58 184 C56 189, 64 192, 68 187 L76 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
-                            <path d="M63 164 L60 178" stroke="url(#chemGradOverlay)" stroke-width="1.8" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="59" cy="194" r="7.5" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.75" />
-                            <circle cx="59" cy="194" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
+                            <circle cx="82" cy="152" r="7" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.8" />
+                            <path d="M74 156 L66 185 C64 190, 72 193, 76 188 L84 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.6" />
+                            <path d="M71 164 L68 179" stroke="url(#chemGradOverlay)" stroke-width="2" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="67" cy="195" r="7.5" fill="url(#darkMetalOverlay)" stroke="#00d2ff" stroke-width="0.8" />
+                            <circle cx="67" cy="195" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
                         </g>
 
-                        <!-- Lengan Kanan -->
+                        <!-- 🤖 Lengan Kanan Robot -->
                         <g class="robot-arm-right">
-                            <circle cx="186" cy="152" r="6.5" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.75" />
-                            <path d="M194 156 L202 184 C204 189, 196 192, 192 187 L184 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
-                            <path d="M197 164 L200 178" stroke="url(#bioGradOverlay)" stroke-width="1.8" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="201" cy="194" r="7.5" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.75" />
-                            <circle cx="201" cy="194" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
+                            <circle cx="198" cy="152" r="7" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.8" />
+                            <path d="M206 156 L214 185 C216 190, 208 193, 204 188 L196 160 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.6" />
+                            <path d="M209 164 L212 179" stroke="url(#bioGradOverlay)" stroke-width="2" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="213" cy="195" r="7.5" fill="url(#darkMetalOverlay)" stroke="#10b981" stroke-width="0.8" />
+                            <circle cx="213" cy="195" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
                         </g>
 
-                        <!-- Badan Utama -->
+                        <!-- 🤖 BADAN UTAMA ROBOT -->
                         <g class="robot-main-body">
-                            <rect x="122" y="112" width="16" height="12" rx="4" fill="url(#darkMetalOverlay)" stroke="#475569" stroke-width="0.5" />
-                            <path d="M78 135 C78 125, 96 123, 100 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
-                            <path d="M182 135 C182 125, 164 123, 160 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
-                            <path d="M115 195 Q130 236 145 195 Z" fill="url(#chemGradOverlay)" filter="url(#robotGlowOverlay)" opacity="0.95">
+                            <!-- Sendi Leher Metal -->
+                            <rect x="132" y="113" width="16" height="11" rx="4" fill="url(#darkMetalOverlay)" stroke="#475569" stroke-width="0.5" />
+
+                            <!-- Pelindung Bahu -->
+                            <path d="M88 135 C88 124, 106 122, 110 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.6" />
+                            <path d="M192 135 C192 124, 174 122, 170 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.6" />
+
+                            <!-- Api Plasma Propulsi Kuantum Bawah -->
+                            <path d="M125 196 Q140 238 155 196 Z" fill="url(#chemGradOverlay)" filter="url(#robotGlowOverlay)" opacity="0.95">
                                 <animate attributeName="opacity" values="0.8;1;0.8" dur="0.12s" repeatCount="indefinite" />
                             </path>
-                            <path d="M122 195 Q130 218 138 195 Z" fill="#ffffff" filter="url(#robotGlowOverlay)" opacity="0.95" />
-                            <path d="M96 132 L164 132 L154 192 C154 197, 106 197, 106 192 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.75" />
+                            <path d="M132 196 Q140 218 148 196 Z" fill="#ffffff" filter="url(#robotGlowOverlay)" opacity="0.95" />
+
+                            <!-- Pelindung Dada & Punggung Luar -->
+                            <path d="M106 132 L174 132 L164 193 C164 198, 116 198, 116 193 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.8" />
                             
-                            <!-- 🧪 KIMIA: Hexagon Benzena -->
-                            <path class="robot-chem-hexagon" d="M 130 118 L 164 138 L 164 178 L 130 198 L 96 178 L 96 138 Z" fill="#0d1527" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linejoin="round" />
-                            <circle cx="130" cy="118" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
-                            <circle cx="164" cy="138" r="3.5" fill="#3b82f6" />
-                            <circle cx="164" cy="178" r="3.5" fill="#00d2ff" />
-                            <circle cx="130" cy="198" r="3.5" fill="#3b82f6" filter="url(#robotGlowOverlay)" />
-                            <circle cx="96" cy="178" r="3.5" fill="#00d2ff" />
-                            <circle cx="96" cy="138" r="3.5" fill="#3b82f6" />
+                            <!-- 🧪 KIMIA: Rangka Armor Heksagonal Cincin Benzena -->
+                            <path class="robot-chem-hexagon" d="M 140 120 L 174 140 L 174 180 L 140 200 L 106 180 L 106 140 Z" fill="#080e1e" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linejoin="round" />
+                            <circle cx="140" cy="120" r="3.5" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
+                            <circle cx="174" cy="140" r="3.5" fill="#3b82f6" />
+                            <circle cx="174" cy="180" r="3.5" fill="#00d2ff" />
+                            <circle cx="140" cy="200" r="3.5" fill="#3b82f6" filter="url(#robotGlowOverlay)" />
+                            <circle cx="106" cy="180" r="3.5" fill="#00d2ff" />
+                            <circle cx="106" cy="140" r="3.5" fill="#3b82f6" />
 
-                            <!-- 🧬 BIOLOGI: DNA Double Helix -->
-                            <rect x="114" y="128" width="32" height="60" rx="16" fill="rgba(6, 78, 59, 0.45)" stroke="url(#bioGradOverlay)" stroke-width="1.2" />
+                            <!-- 🧬 BIOLOGI: Kapsul Bio-Reaktor DNA Double Helix -->
+                            <rect x="125" y="130" width="30" height="60" rx="15" fill="rgba(6, 78, 59, 0.5)" stroke="url(#bioGradOverlay)" stroke-width="1.2" />
+                            
                             <g class="robot-dna-strand">
-                                <path d="M 123 134 Q 137 146 123 158 T 123 182" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
-                                <path d="M 137 134 Q 123 146 137 158 T 137 182" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
-                                <line x1="125" y1="139" x2="135" y2="139" stroke="#10b981" stroke-width="1.5" />
-                                <line x1="123" y1="148" x2="137" y2="148" stroke="#06b6d4" stroke-width="1.5" />
-                                <line x1="125" y1="158" x2="135" y2="158" stroke="#10b981" stroke-width="1.5" />
-                                <line x1="123" y1="168" x2="137" y2="168" stroke="#06b6d4" stroke-width="1.5" />
-                                <line x1="125" y1="177" x2="135" y2="177" stroke="#10b981" stroke-width="1.5" />
+                                <path d="M 133 135 Q 147 147 133 159 T 133 183" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
+                                <path d="M 147 135 Q 133 147 147 159 T 147 183" fill="none" stroke="url(#bioGradOverlay)" stroke-width="2.2" stroke-linecap="round" />
+                                <line x1="135" y1="140" x2="145" y2="140" stroke="#10b981" stroke-width="1.5" />
+                                <line x1="133" y1="149" x2="147" y2="149" stroke="#06b6d4" stroke-width="1.5" />
+                                <line x1="135" y1="159" x2="145" y2="159" stroke="#10b981" stroke-width="1.5" />
+                                <line x1="133" y1="169" x2="147" y2="169" stroke="#06b6d4" stroke-width="1.5" />
+                                <line x1="135" y1="178" x2="145" y2="178" stroke="#10b981" stroke-width="1.5" />
                             </g>
 
-                            <!-- ⚛️ FISIKA: Cincin Kuantum -->
-                            <ellipse cx="130" cy="158" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 130 158)" />
-                            <circle cx="130" cy="158" r="4.5" fill="#ffffff" filter="url(#robotGlowOverlay)" />
+                            <!-- ⚛️ FISIKA: Inti Cincin Kuantum Fusi -->
+                            <ellipse cx="140" cy="159" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 140 159)" />
+                            <circle cx="140" cy="159" r="4.5" fill="#ffffff" filter="url(#robotGlowOverlay)" />
 
-                            <!-- Antena Molekuler -->
-                            <rect x="63" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
-                            <rect x="189" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
-                            <line x1="67" y1="65" x2="60" y2="46" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <line x1="193" y1="65" x2="200" y2="46" stroke="url(#bioGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
-                            <circle cx="60" cy="46" r="3.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
-                            <circle cx="200" cy="46" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
+                            <!-- Antena Sensor Kuantum Molekuler Samping -->
+                            <rect x="73" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <rect x="199" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <line x1="77" y1="65" x2="70" y2="45" stroke="url(#chemGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <line x1="203" y1="65" x2="210" y2="45" stroke="url(#bioGradOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="70" cy="45" r="3.5" fill="#fde047" filter="url(#robotGlowOverlay)" />
+                            <circle cx="210" cy="45" r="3.5" fill="#10b981" filter="url(#robotGlowOverlay)" />
 
-                            <!-- Helm Robot -->
-                            <rect x="68" y="42" width="124" height="76" rx="38" fill="url(#armorGradOverlay)" stroke="#f1f5f9" stroke-width="0.75" />
-                            <rect x="76" y="49" width="108" height="62" rx="30" fill="url(#visorGradOverlay)" stroke="#1e293b" stroke-width="1" />
-                            <rect x="78" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGradOverlay)" stroke-width="1" opacity="0.45" />
+                            <!-- Helm Robot Android -->
+                            <rect x="78" y="42" width="124" height="76" rx="38" fill="url(#armorGradOverlay)" stroke="#f1f5f9" stroke-width="0.8" />
 
+                            <!-- Kaca Visor Hitam Obsidian Melengkung -->
+                            <rect x="86" y="49" width="108" height="62" rx="30" fill="url(#visorGradOverlay)" stroke="#1e293b" stroke-width="1" />
+                            <rect x="88" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGradOverlay)" stroke-width="1" opacity="0.4" />
+
+                            <!-- 🧪 Lambang Molekul Halus Pada Dahi Visor -->
+                            <circle cx="140" cy="57" r="2.2" fill="#00d2ff" filter="url(#robotGlowOverlay)" />
+                            <circle cx="134" cy="61" r="1.5" fill="#10b981" />
+                            <circle cx="146" cy="61" r="1.5" fill="#fde047" />
+                            <line x1="140" y1="57" x2="134" y2="61" stroke="#00d2ff" stroke-width="0.8" opacity="0.7" />
+                            <line x1="140" y1="57" x2="146" y2="61" stroke="#00d2ff" stroke-width="0.8" opacity="0.7" />
+
+                            <!-- Mata Visor Sentient AI (Pupil Mengikuti Kursor) -->
                             <g class="robot-eyes-group">
-                                <ellipse cx="108" cy="78" rx="16" ry="12" fill="#020617" />
-                                <ellipse cx="152" cy="78" rx="16" ry="12" fill="#020617" />
+                                <ellipse cx="118" cy="78" rx="15" ry="11" fill="#020617" />
+                                <ellipse cx="162" cy="78" rx="15" ry="11" fill="#020617" />
+
                                 <g class="overlay-pupil-left">
-                                    <circle cx="108" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
-                                    <circle cx="109.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                    <circle cx="118" cy="78" r="7.2" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="119.5" cy="76.5" r="2.2" fill="#ffffff" />
                                 </g>
+
                                 <g class="overlay-pupil-right">
-                                    <circle cx="152" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
-                                    <circle cx="153.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                    <circle cx="162" cy="78" r="7.2" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="163.5" cy="76.5" r="2.2" fill="#ffffff" />
                                 </g>
                             </g>
-                            <path d="M 82 64 C 100 53, 140 53, 178 64 C 160 57, 100 57, 82 64 Z" fill="#ffffff" opacity="0.25" />
+
+                            <!-- Kilau Refleksi Kaca Lengkung Visor -->
+                            <path d="M 92 64 C 110 53, 150 53, 188 64 C 170 57, 110 57, 92 64 Z" fill="#ffffff" opacity="0.25" />
                         </g>
                     </svg>
                 </div>
@@ -633,7 +655,7 @@
                             <!-- Background Cyber Glow / Halo -->
                             <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/20 via-sky-500/15 to-amber-500/20 blur-2xl pointer-events-none transform scale-90"></div>
                             
-                            <svg id="robot-svg" viewBox="0 0 260 290" class="w-full h-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Synthesis AI - Bio Physics Chemistry Science Robot">
+                            <svg id="robot-svg" viewBox="0 0 280 300" class="w-full h-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot Android Sains Terpadu - Synthesis AI">
                                 <defs>
                                     <!-- 🧪 KIMIA GRADIENT -->
                                     <linearGradient id="chemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -660,10 +682,10 @@
                                         <stop offset="100%" stop-color="#020617" />
                                     </radialGradient>
 
-                                    <!-- Metallic armor gradient -->
+                                    <!-- Pearl metallic armor gradient -->
                                     <linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#f8fafc" />
-                                        <stop offset="35%" stop-color="#e2e8f0" />
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#f1f5f9" />
                                         <stop offset="70%" stop-color="#cbd5e1" />
                                         <stop offset="100%" stop-color="#94a3b8" />
                                     </linearGradient>
@@ -686,148 +708,150 @@
                                     </filter>
                                 </defs>
 
-                                <!-- ⚛️ FISIKA: Orbit Atom Mengelilingi Robot -->
-                                <g class="robot-physics-orbits" transform="translate(130, 145)">
+                                <!-- ⚛️ FISIKA: Cincin Orbit Medan Atom Bohr Mengelilingi Tubuh Robot -->
+                                <g class="robot-physics-orbits" transform="translate(140, 150)">
                                     <!-- Orbit 1 (30 deg) -->
-                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(30)" opacity="0.65" stroke-dasharray="8 4" />
-                                    <circle cx="97" cy="18" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
-                                    <circle cx="-97" cy="-18" r="3" fill="#f59e0b" />
+                                    <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(30)" opacity="0.7" stroke-dasharray="8 5" />
+                                    <circle cx="93" cy="17" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="-93" cy="-17" r="3" fill="#f59e0b" />
 
                                     <!-- Orbit 2 (90 deg) -->
-                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(90)" opacity="0.65" stroke-dasharray="8 4" />
-                                    <circle cx="0" cy="112" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
-                                    <circle cx="0" cy="-112" r="3" fill="#f59e0b" />
+                                    <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(90)" opacity="0.7" stroke-dasharray="8 5" />
+                                    <circle cx="0" cy="108" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="0" cy="-108" r="3" fill="#f59e0b" />
 
                                     <!-- Orbit 3 (150 deg) -->
-                                    <ellipse cx="0" cy="0" rx="112" ry="36" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(150)" opacity="0.65" stroke-dasharray="8 4" />
-                                    <circle cx="-97" cy="18" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
-                                    <circle cx="97" cy="-18" r="3" fill="#f59e0b" />
+                                    <ellipse cx="0" cy="0" rx="108" ry="34" fill="none" stroke="url(#physGrad)" stroke-width="1.8" transform="rotate(150)" opacity="0.7" stroke-dasharray="8 5" />
+                                    <circle cx="-93" cy="17" r="4.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="93" cy="-17" r="3" fill="#f59e0b" />
                                 </g>
 
-                                <!-- 💨 Thruster & Partikel Energi Kuantum -->
+                                <!-- 💨 Propulsi Bawah & Partikel Energi Kuantum -->
                                 <g opacity="0.8">
-                                    <!-- Partikel Melayang (3 Warna: Cyan Kimia, Hijau Biologi, Emas Fisika) -->
-                                    <circle cx="130" cy="225" r="3" fill="#10b981">
-                                        <animate attributeName="cy" values="225;260;225" dur="2.4s" repeatCount="indefinite" />
+                                    <circle cx="140" cy="226" r="3" fill="#10b981">
+                                        <animate attributeName="cy" values="226;265;226" dur="2.4s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
                                     </circle>
-                                    <circle cx="114" cy="232" r="2.5" fill="#00d2ff">
-                                        <animate attributeName="cy" values="232;264;232" dur="2.8s" repeatCount="indefinite" />
+                                    <circle cx="124" cy="233" r="2.5" fill="#00d2ff">
+                                        <animate attributeName="cy" values="233;268;233" dur="2.8s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
                                     </circle>
-                                    <circle cx="146" cy="230" r="2.8" fill="#fde047">
-                                        <animate attributeName="cy" values="230;262;230" dur="2.1s" repeatCount="indefinite" />
+                                    <circle cx="156" cy="231" r="2.8" fill="#fde047">
+                                        <animate attributeName="cy" values="231;266;231" dur="2.1s" repeatCount="indefinite" />
                                         <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
                                     </circle>
                                 </g>
 
-                                <!-- 🤖 Lengan Kiri Robot (Mengambang Independen) -->
+                                <!-- 🤖 Lengan Kiri Robot (Levitasi Kuantum & Tabung Fluida Sains) -->
                                 <g class="robot-arm-left">
-                                    <circle cx="74" cy="152" r="6.5" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.75" />
-                                    <path d="M66 156 L58 184 C56 189, 64 192, 68 187 L76 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
-                                    <!-- Garis Ikatan Kimia Pada Lengan -->
-                                    <path d="M63 164 L60 178" stroke="url(#chemGrad)" stroke-width="1.8" stroke-linecap="round" filter="url(#scienceGlow)" />
-                                    <circle cx="59" cy="194" r="7.5" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.75" />
-                                    <circle cx="59" cy="194" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
+                                    <circle cx="82" cy="152" r="7" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.8" />
+                                    <path d="M74 156 L66 185 C64 190, 72 193, 76 188 L84 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.6" />
+                                    <!-- Saluran Fluida Kimia Cyan -->
+                                    <path d="M71 164 L68 179" stroke="url(#chemGrad)" stroke-width="2" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="67" cy="195" r="7.5" fill="url(#darkMetal)" stroke="#00d2ff" stroke-width="0.8" />
+                                    <circle cx="67" cy="195" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
                                 </g>
 
-                                <!-- 🤖 Lengan Kanan Robot (Mengambang Independen) -->
+                                <!-- 🤖 Lengan Kanan Robot (Levitasi Kuantum & Tabung Bio-Fluida) -->
                                 <g class="robot-arm-right">
-                                    <circle cx="186" cy="152" r="6.5" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.75" />
-                                    <path d="M194 156 L202 184 C204 189, 196 192, 192 187 L184 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
-                                    <!-- Garis Ikatan Kimia Pada Lengan -->
-                                    <path d="M197 164 L200 178" stroke="url(#bioGrad)" stroke-width="1.8" stroke-linecap="round" filter="url(#scienceGlow)" />
-                                    <circle cx="201" cy="194" r="7.5" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.75" />
-                                    <circle cx="201" cy="194" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
+                                    <circle cx="198" cy="152" r="7" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.8" />
+                                    <path d="M206 156 L214 185 C216 190, 208 193, 204 188 L196 160 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.6" />
+                                    <!-- Saluran Bio-Fluida Zamrud -->
+                                    <path d="M209 164 L212 179" stroke="url(#bioGrad)" stroke-width="2" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="213" cy="195" r="7.5" fill="url(#darkMetal)" stroke="#10b981" stroke-width="0.8" />
+                                    <circle cx="213" cy="195" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
                                 </g>
 
-                                <!-- 🤖 BADAN UTAMA ROBOT (Melayang & 3D Tilt) -->
+                                <!-- 🤖 BADAN UTAMA ROBOT (Melayang, Bobbing, 3D Parallax Tilt) -->
                                 <g class="robot-main-body">
-                                    <!-- Leher Metal -->
-                                    <rect x="122" y="112" width="16" height="12" rx="4" fill="url(#darkMetal)" stroke="#475569" stroke-width="0.5" />
+                                    <!-- Sendi Leher Metal -->
+                                    <rect x="132" y="113" width="16" height="11" rx="4" fill="url(#darkMetal)" stroke="#475569" stroke-width="0.5" />
 
-                                    <!-- Pelindung Bahu -->
-                                    <path d="M78 135 C78 125, 96 123, 100 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
-                                    <path d="M182 135 C182 125, 164 123, 160 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
+                                    <!-- Pelindung Bahu Polimer Aerodinamis -->
+                                    <path d="M88 135 C88 124, 106 122, 110 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.6" />
+                                    <path d="M192 135 C192 124, 174 122, 170 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.6" />
 
-                                    <!-- Semburan Api Thruster Bawah -->
-                                    <path d="M115 195 Q130 236 145 195 Z" fill="url(#chemGrad)" filter="url(#scienceGlow)" opacity="0.95">
+                                    <!-- Api Plasma Propulsi Kuantum Bawah -->
+                                    <path d="M125 196 Q140 238 155 196 Z" fill="url(#chemGrad)" filter="url(#scienceGlow)" opacity="0.95">
                                         <animate attributeName="opacity" values="0.8;1;0.8" dur="0.12s" repeatCount="indefinite" />
                                     </path>
-                                    <path d="M122 195 Q130 218 138 195 Z" fill="#ffffff" filter="url(#scienceGlow)" opacity="0.95" />
+                                    <path d="M132 196 Q140 218 148 196 Z" fill="#ffffff" filter="url(#scienceGlow)" opacity="0.95" />
 
-                                    <!-- Torso Pelindung Luar -->
-                                    <path d="M96 132 L164 132 L154 192 C154 197, 106 197, 106 192 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.75" />
+                                    <!-- Pelindung Dada & Punggung Luar (Armor Nanotech) -->
+                                    <path d="M106 132 L174 132 L164 193 C164 198, 116 198, 116 193 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.8" />
                                     
-                                    <!-- 🧪 KIMIA: Cincin Benzena Hexagon (C6H6) Pada Dada Robot -->
-                                    <path class="robot-chem-hexagon" d="M 130 118 L 164 138 L 164 178 L 130 198 L 96 178 L 96 138 Z" fill="#0d1527" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linejoin="round" />
-                                    <!-- Ikatan Kovalen Tambahan & Node Atom Kimia -->
-                                    <circle cx="130" cy="118" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
-                                    <circle cx="164" cy="138" r="3.5" fill="#3b82f6" />
-                                    <circle cx="164" cy="178" r="3.5" fill="#00d2ff" />
-                                    <circle cx="130" cy="198" r="3.5" fill="#3b82f6" filter="url(#scienceGlow)" />
-                                    <circle cx="96" cy="178" r="3.5" fill="#00d2ff" />
-                                    <circle cx="96" cy="138" r="3.5" fill="#3b82f6" />
+                                    <!-- 🧪 KIMIA: Rangka Armor Heksagonal Cincin Benzena (C6H6) Terpadu -->
+                                    <path class="robot-chem-hexagon" d="M 140 120 L 174 140 L 174 180 L 140 200 L 106 180 L 106 140 Z" fill="#080e1e" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linejoin="round" />
+                                    <!-- Simpul Ikatan Kovalen Molekul Kimia -->
+                                    <circle cx="140" cy="120" r="3.5" fill="#00d2ff" filter="url(#scienceGlow)" />
+                                    <circle cx="174" cy="140" r="3.5" fill="#3b82f6" />
+                                    <circle cx="174" cy="180" r="3.5" fill="#00d2ff" />
+                                    <circle cx="140" cy="200" r="3.5" fill="#3b82f6" filter="url(#scienceGlow)" />
+                                    <circle cx="106" cy="180" r="3.5" fill="#00d2ff" />
+                                    <circle cx="106" cy="140" r="3.5" fill="#3b82f6" />
 
-                                    <!-- 🧬 BIOLOGI: Tabung Bio-Reaktor DNA Double Helix -->
-                                    <rect x="114" y="128" width="32" height="60" rx="16" fill="rgba(6, 78, 59, 0.45)" stroke="url(#bioGrad)" stroke-width="1.2" />
+                                    <!-- 🧬 BIOLOGI: Kapsul Bio-Reaktor DNA Double Helix -->
+                                    <rect x="125" y="130" width="30" height="60" rx="15" fill="rgba(6, 78, 59, 0.5)" stroke="url(#bioGrad)" stroke-width="1.2" />
                                     
-                                    <!-- Untaian Ganda DNA (Double Helix Strands) -->
+                                    <!-- Untaian DNA Ganda (Double Helix) di Dalam Reaktor Dada -->
                                     <g class="robot-dna-strand">
-                                        <!-- Untaian DNA 1 -->
-                                        <path d="M 123 134 Q 137 146 123 158 T 123 182" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
-                                        <!-- Untaian DNA 2 -->
-                                        <path d="M 137 134 Q 123 146 137 158 T 137 182" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
-                                        
-                                        <!-- Anak Tangga Pasangan Basa DNA (Base Pairs A-T, G-C) -->
-                                        <line x1="125" y1="139" x2="135" y2="139" stroke="#10b981" stroke-width="1.5" />
-                                        <line x1="123" y1="148" x2="137" y2="148" stroke="#06b6d4" stroke-width="1.5" />
-                                        <line x1="125" y1="158" x2="135" y2="158" stroke="#10b981" stroke-width="1.5" />
-                                        <line x1="123" y1="168" x2="137" y2="168" stroke="#06b6d4" stroke-width="1.5" />
-                                        <line x1="125" y1="177" x2="135" y2="177" stroke="#10b981" stroke-width="1.5" />
+                                        <path d="M 133 135 Q 147 147 133 159 T 133 183" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
+                                        <path d="M 147 135 Q 133 147 147 159 T 147 183" fill="none" stroke="url(#bioGrad)" stroke-width="2.2" stroke-linecap="round" />
+                                        <!-- Pasangan Basa DNA (Base Pairs A-T, G-C) -->
+                                        <line x1="135" y1="140" x2="145" y2="140" stroke="#10b981" stroke-width="1.5" />
+                                        <line x1="133" y1="149" x2="147" y2="149" stroke="#06b6d4" stroke-width="1.5" />
+                                        <line x1="135" y1="159" x2="145" y2="159" stroke="#10b981" stroke-width="1.5" />
+                                        <line x1="133" y1="169" x2="147" y2="169" stroke="#06b6d4" stroke-width="1.5" />
+                                        <line x1="135" y1="178" x2="145" y2="178" stroke="#10b981" stroke-width="1.5" />
                                     </g>
 
-                                    <!-- ⚛️ FISIKA: Cincin Kuantum Inti Tengah -->
-                                    <ellipse cx="130" cy="158" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 130 158)" />
-                                    <circle cx="130" cy="158" r="4.5" fill="#ffffff" filter="url(#scienceGlow)" />
+                                    <!-- ⚛️ FISIKA: Inti Cincin Kuantum Fusi -->
+                                    <ellipse cx="140" cy="159" rx="14" ry="4.5" fill="none" stroke="#fde047" stroke-width="1" opacity="0.85" transform="rotate(-15 140 159)" />
+                                    <circle cx="140" cy="159" r="4.5" fill="#ffffff" filter="url(#scienceGlow)" />
 
-                                    <!-- Antena Sensor Sains Kiri & Kanan (Probe Molekuler) -->
-                                    <rect x="63" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
-                                    <rect x="189" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
-                                    <line x1="67" y1="65" x2="60" y2="46" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
-                                    <line x1="193" y1="65" x2="200" y2="46" stroke="url(#bioGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
-                                    <circle cx="60" cy="46" r="3.5" fill="#fde047" filter="url(#scienceGlow)" />
-                                    <circle cx="200" cy="46" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
+                                    <!-- Antena Sensor Kuantum Molekuler Samping -->
+                                    <rect x="73" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <rect x="199" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <line x1="77" y1="65" x2="70" y2="45" stroke="url(#chemGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <line x1="203" y1="65" x2="210" y2="45" stroke="url(#bioGrad)" stroke-width="2.5" stroke-linecap="round" filter="url(#scienceGlow)" />
+                                    <circle cx="70" cy="45" r="3.5" fill="#fde047" filter="url(#scienceGlow)" />
+                                    <circle cx="210" cy="45" r="3.5" fill="#10b981" filter="url(#scienceGlow)" />
 
-                                    <!-- Helm Robot Luar -->
-                                    <rect x="68" y="42" width="124" height="76" rx="38" fill="url(#armorGrad)" stroke="#f1f5f9" stroke-width="0.75" />
+                                    <!-- Helm Robot Android (Kurva Halus & Elegan) -->
+                                    <rect x="78" y="42" width="124" height="76" rx="38" fill="url(#armorGrad)" stroke="#f1f5f9" stroke-width="0.8" />
 
-                                    <!-- Frame Kaca Visor -->
-                                    <rect x="76" y="49" width="108" height="62" rx="30" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="1" />
-                                    <rect x="78" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGrad)" stroke-width="1" opacity="0.45" />
+                                    <!-- Kaca Visor Hitam Obsidian Melengkung -->
+                                    <rect x="86" y="49" width="108" height="62" rx="30" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="1" />
+                                    <rect x="88" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#chemGrad)" stroke-width="1" opacity="0.4" />
 
-                                    <!-- Mata Visor (Mata Kiri & Kanan Mengikuti Kursor) -->
+                                    <!-- 🧪 Lambang Molekul Halus Pada Dahi Visor -->
+                                    <circle cx="140" cy="57" r="2.2" fill="#00d2ff" filter="url(#scienceGlow)" />
+                                    <circle cx="134" cy="61" r="1.5" fill="#10b981" />
+                                    <circle cx="146" cy="61" r="1.5" fill="#fde047" />
+                                    <line x1="140" y1="57" x2="134" y2="61" stroke="#00d2ff" stroke-width="0.8" opacity="0.7" />
+                                    <line x1="140" y1="57" x2="146" y2="61" stroke="#00d2ff" stroke-width="0.8" opacity="0.7" />
+
+                                    <!-- Mata Visor Sentient AI (Pupil Mengikuti Kursor) -->
                                     <g class="robot-eyes-group">
-                                        <!-- Rongga Mata Kiri -->
-                                        <ellipse cx="108" cy="78" rx="16" ry="12" fill="#020617" />
-                                        <!-- Rongga Mata Kanan -->
-                                        <ellipse cx="152" cy="78" rx="16" ry="12" fill="#020617" />
+                                        <!-- Rongga Mata Kiri & Kanan -->
+                                        <ellipse cx="118" cy="78" rx="15" ry="11" fill="#020617" />
+                                        <ellipse cx="162" cy="78" rx="15" ry="11" fill="#020617" />
 
                                         <!-- Pupil Kiri (Interaktif Mengikuti Kursor) -->
                                         <g class="robot-pupil-left-group">
-                                            <circle cx="108" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
-                                            <circle cx="109.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                            <circle cx="118" cy="78" r="7.2" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
+                                            <circle cx="119.5" cy="76.5" r="2.2" fill="#ffffff" />
                                         </g>
 
                                         <!-- Pupil Kanan (Interaktif Mengikuti Kursor) -->
                                         <g class="robot-pupil-right-group">
-                                            <circle cx="152" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
-                                            <circle cx="153.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                            <circle cx="162" cy="78" r="7.2" fill="url(#pupilGrad)" filter="url(#scienceGlow)" class="robot-pupil" />
+                                            <circle cx="163.5" cy="76.5" r="2.2" fill="#ffffff" />
                                         </g>
                                     </g>
 
-                                    <!-- Kilau Refleksi Kaca Visor Lengkung -->
-                                    <path d="M 82 64 C 100 53, 140 53, 178 64 C 160 57, 100 57, 82 64 Z" fill="#ffffff" opacity="0.25" />
+                                    <!-- Kilau Refleksi Kaca Lengkung Visor -->
+                                    <path d="M 92 64 C 110 53, 150 53, 188 64 C 170 57, 110 57, 92 64 Z" fill="#ffffff" opacity="0.25" />
                                 </g>
                             </svg>
                         </div>
