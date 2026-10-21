@@ -182,107 +182,159 @@ window.addEventListener('resize', () => {
     }
 });
 
-// --- Robot SVG Animation ---
-const dashboardRobot = {
-    svg: document.getElementById('robot-svg'),
-    core: document.getElementById('robot-core'),
-    eye: document.getElementById('robot-eye'),
-    dna: document.getElementById('dna-helix'),
-    orbits: document.getElementById('phys-orbits'),
-    hex: document.getElementById('chem-hex'),
-    textTitle: document.getElementById('robot-text-title'),
-    textSubtitle: document.getElementById('robot-text-subtitle'),
-};
-const overlayRobot = {
-    svg: document.getElementById('overlay-robot-svg'),
-    core: document.getElementById('overlay-robot-core'),
-    eye: document.getElementById('overlay-robot-eye'),
-    dna: document.getElementById('overlay-dna-helix'),
-    orbits: document.getElementById('overlay-phys-orbits'),
-    hex: document.getElementById('overlay-chem-hex'),
-};
-const robotSets = [dashboardRobot, overlayRobot].filter(robot => robot.svg);
-let frame = 0;
+// --- Gen-Z Robot Companion (Synthesis AI) Interactive Engine ---
+const robot3dWrapper = document.getElementById('robot-3d-wrapper');
+const robotSvg = document.getElementById('robot-svg');
+const pupilLeft = document.querySelector('.robot-pupil-left-group');
+const pupilRight = document.querySelector('.robot-pupil-right-group');
+const overlayPupilLeft = document.querySelector('.overlay-pupil-left');
+const overlayPupilRight = document.querySelector('.overlay-pupil-right');
+const eyesGroups = document.querySelectorAll('.robot-eyes-group');
+const synthesisBubble = document.getElementById('synthesis-bubble');
+const synthesisSpeechText = document.getElementById('synthesis-speech-text');
+const synthesisEmoji = document.getElementById('synthesis-emoji');
 
-function animateSingleRobot(robot) {
-    if (!robot.svg) return;
+const genZQuotes = [
+    { emoji: "🧬", text: "Yo! I'm Synthesis AI. Let's explore Malik's work! ✨" },
+    { emoji: "⚡", text: "Biotechnology + High-Perf Web = Pure Innovation! 🚀" },
+    { emoji: "🔥", text: "100% vibe-coded, research-backed & future ready!" },
+    { emoji: "💻", text: "Check out Malik's projects below — they're insane!" },
+    { emoji: "🏆", text: "Educator by day, builder & researcher 24/7." },
+    { emoji: "🚀", text: "Click me again for another quick cyber boost!" }
+];
+let currentQuoteIndex = 0;
+let bubbleTimeout = null;
 
-    if (robot.core) {
-        const svgRect = robot.svg.getBoundingClientRect();
-        const centerX = svgRect.left + svgRect.width / 2;
-        const centerY = svgRect.top + svgRect.height / 2;
-        const maxMove = 30;
-        const moveX = Math.max(-maxMove, Math.min(maxMove, (mouseX - centerX) * 0.15));
-        const moveY = Math.max(-maxMove, Math.min(maxMove, (mouseY - centerY) * 0.15));
-        const scale = 1 + Math.sin(frame) * 0.2;
-        robot.core.style.transformOrigin = "300px 245px";
-        robot.core.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
-        robot.core.style.opacity = 0.5 + Math.sin(frame) * 0.5;
-    }
+function showSpeechBubble(quote) {
+    if (!synthesisBubble) return;
+    const item = quote || genZQuotes[currentQuoteIndex];
+    if (synthesisEmoji) synthesisEmoji.textContent = item.emoji;
+    if (synthesisSpeechText) synthesisSpeechText.textContent = item.text;
+    synthesisBubble.classList.add('active');
+    clearTimeout(bubbleTimeout);
+    bubbleTimeout = setTimeout(() => {
+        synthesisBubble.classList.remove('active');
+    }, 4500);
+}
 
-    if (robot.eye) {
-        const translateY = Math.sin(frame * 0.5) * 5;
-        robot.eye.setAttribute('transform', `translate(0, ${translateY})`);
-    }
+function nextSpeechBubble() {
+    currentQuoteIndex = (currentQuoteIndex + 1) % genZQuotes.length;
+    showSpeechBubble(genZQuotes[currentQuoteIndex]);
+}
 
-    if (robot.orbits) {
-        robot.orbits.setAttribute('transform', `translate(300, 240) rotate(${frame * 10})`);
-    }
+// Playful Gen-Z Cyber Chime via Web Audio API
+function playCyberChime() {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
 
-    if (robot.hex) {
-        const opacity = 0.7 + Math.sin(frame * 0.5) * 0.2;
-        robot.hex.style.opacity = opacity;
-    }
+        const notes = [587.33, 880, 1174.66]; // D5, A5, D6 sci-fi arpeggio
+        notes.forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
 
-    if (robot.dna) {
-        const skew = Math.sin(frame * 2) * 2;
-        robot.dna.setAttribute('transform', `translate(0, -20) skewX(${skew})`);
+            gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + i * 0.08 + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.08 + 0.25);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + i * 0.08);
+            osc.stop(ctx.currentTime + i * 0.08 + 0.26);
+        });
+    } catch (e) {
+        // Fallback silently if audio blocked by browser policy
     }
 }
 
-function animateRobot() {
-    frame += 0.05;
-    robotSets.forEach(animateSingleRobot);
-    requestAnimationFrame(animateRobot);
+// Click & Tap Interaction on Robot
+if (robot3dWrapper) {
+    robot3dWrapper.addEventListener('click', () => {
+        playCyberChime();
+        nextSpeechBubble();
+
+        // Celebration pop animation
+        robot3dWrapper.classList.remove('robot-celebrate');
+        // Trigger reflow
+        void robot3dWrapper.offsetWidth;
+        robot3dWrapper.classList.add('robot-celebrate');
+
+        // Quick playful wink
+        eyesGroups.forEach(eg => eg.classList.add('robot-eyes-blink'));
+        setTimeout(() => {
+            eyesGroups.forEach(eg => eg.classList.remove('robot-eyes-blink'));
+        }, 180);
+    });
+
+    robot3dWrapper.addEventListener('mouseenter', () => {
+        showSpeechBubble();
+    });
 }
 
-animateRobot();
+// Lifelike Eye Blinking (Organic Interval)
+function triggerEyeBlink() {
+    eyesGroups.forEach(eg => eg.classList.add('robot-eyes-blink'));
+    setTimeout(() => {
+        eyesGroups.forEach(eg => eg.classList.remove('robot-eyes-blink'));
+        const nextBlinkDelay = 3500 + Math.random() * 3000;
+        setTimeout(triggerEyeBlink, nextBlinkDelay);
+    }, 120);
+}
+setTimeout(triggerEyeBlink, 3000);
 
-function showRobotText() {
-    if (dashboardRobot.textTitle) {
-        dashboardRobot.textTitle.style.opacity = '1';
-        dashboardRobot.textTitle.style.transform = 'translateY(0)';
-        dashboardRobot.textTitle.style.filter = 'drop-shadow(0 0 12px rgba(255,255,255,0.75))';
+// Smooth 3D Tilt & Eye Tracking Engine
+let targetTiltX = 0;
+let targetTiltY = 0;
+let currentTiltX = 0;
+let currentTiltY = 0;
+
+let targetPupilX = 0;
+let targetPupilY = 0;
+let currentPupilX = 0;
+let currentPupilY = 0;
+
+function updateRobotTracking() {
+    if (robot3dWrapper) {
+        const rect = robot3dWrapper.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const deltaX = mouseX - centerX;
+        const deltaY = mouseY - centerY;
+
+        // 3D Parallax Tilt (clamped smoothly)
+        targetTiltY = Math.max(-18, Math.min(18, (deltaX / window.innerWidth) * 36));
+        targetTiltX = Math.max(-18, Math.min(18, -(deltaY / window.innerHeight) * 36));
+
+        // Eye Pupil Shift (clamped to socket bounds)
+        targetPupilX = Math.max(-5, Math.min(5, (deltaX / 160) * 4));
+        targetPupilY = Math.max(-3.5, Math.min(3.5, (deltaY / 160) * 3));
     }
-    if (dashboardRobot.textSubtitle) {
-        dashboardRobot.textSubtitle.style.opacity = '1';
-        dashboardRobot.textSubtitle.style.transform = 'translateY(0)';
-        dashboardRobot.textSubtitle.style.filter = 'drop-shadow(0 0 8px rgba(255,255,255,0.45))';
+
+    // Lerp smoothing (linear interpolation for buttery 60fps movement)
+    currentTiltX += (targetTiltX - currentTiltX) * 0.1;
+    currentTiltY += (targetTiltY - currentTiltY) * 0.1;
+    currentPupilX += (targetPupilX - currentPupilX) * 0.15;
+    currentPupilY += (targetPupilY - currentPupilY) * 0.15;
+
+    if (robot3dWrapper && !robot3dWrapper.classList.contains('robot-celebrate')) {
+        robot3dWrapper.style.transform = `perspective(900px) rotateX(${currentTiltX.toFixed(2)}deg) rotateY(${currentTiltY.toFixed(2)}deg) translateZ(8px)`;
     }
+
+    const pupilTransform = `translate(${currentPupilX.toFixed(2)}px, ${currentPupilY.toFixed(2)}px)`;
+    if (pupilLeft) pupilLeft.setAttribute('transform', pupilTransform);
+    if (pupilRight) pupilRight.setAttribute('transform', pupilTransform);
+    if (overlayPupilLeft) overlayPupilLeft.setAttribute('transform', pupilTransform);
+    if (overlayPupilRight) overlayPupilRight.setAttribute('transform', pupilTransform);
+
+    requestAnimationFrame(updateRobotTracking);
 }
 
-function hideRobotText() {
-    if (dashboardRobot.textTitle) {
-        dashboardRobot.textTitle.style.opacity = '0';
-        dashboardRobot.textTitle.style.transform = 'translateY(10px)';
-        dashboardRobot.textTitle.style.filter = 'none';
-    }
-    if (dashboardRobot.textSubtitle) {
-        dashboardRobot.textSubtitle.style.opacity = '0';
-        dashboardRobot.textSubtitle.style.transform = 'translateY(10px)';
-        dashboardRobot.textSubtitle.style.filter = 'none';
-    }
-}
-
-if (dashboardRobot.svg) {
-    dashboardRobot.svg.addEventListener('mouseenter', showRobotText);
-    dashboardRobot.svg.addEventListener('mouseleave', hideRobotText);
-    dashboardRobot.svg.addEventListener('focus', showRobotText);
-    dashboardRobot.svg.addEventListener('blur', hideRobotText);
-    dashboardRobot.svg.addEventListener('touchstart', showRobotText);
-    dashboardRobot.svg.addEventListener('touchend', hideRobotText);
-    dashboardRobot.svg.addEventListener('touchcancel', hideRobotText);
-}
+requestAnimationFrame(updateRobotTracking);
 
 function animateEntry() {
     const entryItems = document.querySelectorAll('.entry-load-hidden');

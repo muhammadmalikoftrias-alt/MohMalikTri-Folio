@@ -159,44 +159,116 @@
             pointer-events: none;
         }
 
-        .entry-robot {
-            animation: overlayRobotFloat 4.5s ease-in-out infinite, overlayRobotGlow 6s ease-in-out infinite;
+        .robot-card-container {
+            perspective: 1000px;
+        }
+
+        .robot-interactive-wrapper,
+        #robot-svg,
+        #overlay-robot-svg {
+            transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .robot-main-body {
+            animation: robotFloat 4.5s ease-in-out infinite;
             transform-origin: center center;
         }
 
+        .robot-arm-left {
+            transform-origin: 58px 148px;
+            animation: armFloatLeft 3.8s ease-in-out infinite;
+        }
+
+        .robot-arm-right {
+            transform-origin: 142px 148px;
+            animation: armFloatRight 4.2s ease-in-out infinite;
+        }
+
+        @keyframes robotFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-13px) rotate(1.8deg);
+            }
+        }
+
+        @keyframes armFloatLeft {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-7px) rotate(-3.5deg);
+            }
+        }
+
+        @keyframes armFloatRight {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-9px) rotate(3.5deg);
+            }
+        }
+
+        .robot-core-orbit {
+            transform-origin: 100px 158px;
+            animation: coreOrbit 6s linear infinite;
+        }
+
+        @keyframes coreOrbit {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .robot-eyes-group {
+            transform-origin: 100px 78px;
+            transition: transform 0.12s ease;
+        }
+
+        .robot-eyes-blink {
+            transform: scaleY(0.08) !important;
+        }
+
+        .robot-celebrate {
+            animation: robotPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        @keyframes robotPop {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.15) translateY(-22px) rotate(-8deg); }
+            55% { transform: scale(0.95) translateY(4px) rotate(5deg); }
+            80% { transform: scale(1.05) translateY(-4px) rotate(-2deg); }
+            100% { transform: scale(1) translateY(0) rotate(0deg); }
+        }
+
+        .synthesis-speech-bubble {
+            opacity: 0;
+            transform: translateY(8px) scale(0.95);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+
+        .synthesis-speech-bubble.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
         .entry-robot-box {
-            width: 16rem;
-            height: 16rem;
-            min-width: 16rem;
-            min-height: 16rem;
-            background: rgba(15, 23, 42, 0.78);
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            box-shadow: 0 0 24px rgba(56, 189, 248, 0.12);
+            width: 14rem;
+            height: 14rem;
+            min-width: 14rem;
+            min-height: 14rem;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.18);
             border-radius: 1.75rem;
-        }
-
-        @keyframes overlayRobotFloat {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-8px) rotate(1.5deg);
-            }
-        }
-
-        @keyframes overlayRobotGlow {
-
-            0%,
-            100% {
-                filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.22));
-            }
-
-            50% {
-                filter: drop-shadow(0 0 24px rgba(96, 165, 250, 0.35));
-            }
         }
 
         #entry-typing-text {
@@ -267,73 +339,112 @@
         <div class="max-w-3xl text-center px-6 py-10">
             <div
                 class="inline-flex flex-col lg:flex-row items-center gap-6 rounded-3xl border border-white/10 bg-slate-950/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
-                <div class="entry-robot-box flex items-center justify-center p-3">
-                    <svg id="overlay-robot-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%"
-                        height="100%" tabindex="0" role="img" aria-label="Robot overlay illustration">
+                <div class="entry-robot-box flex items-center justify-center p-3 relative overflow-hidden">
+                    <svg id="overlay-robot-svg" viewBox="0 0 200 240" class="w-full h-full drop-shadow-[0_10px_25px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Robot overlay illustration">
                         <defs>
-                            <linearGradient id="chemGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#00d2ff" />
-                                <stop offset="100%" stop-color="#3a7bd5" />
+                            <radialGradient id="visorGradOverlay" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#0f172a" />
+                                <stop offset="70%" stop-color="#090d16" />
+                                <stop offset="100%" stop-color="#030712" />
+                            </radialGradient>
+                            <linearGradient id="armorGradOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="35%" stop-color="#e2e8f0" />
+                                <stop offset="70%" stop-color="#cbd5e1" />
+                                <stop offset="100%" stop-color="#94a3b8" />
                             </linearGradient>
-                            <linearGradient id="bioGradOverlay" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="#00E676" />
-                                <stop offset="100%" stop-color="#1DE9B6" />
+                            <linearGradient id="darkMetalOverlay" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#334155" />
+                                <stop offset="100%" stop-color="#0f172a" />
                             </linearGradient>
-                            <linearGradient id="physGradOverlay" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#FFAB00" />
-                                <stop offset="100%" stop-color="#FFD600" />
+                            <linearGradient id="neonGlowOverlay" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#38bdf8" />
+                                <stop offset="50%" stop-color="#818cf8" />
+                                <stop offset="100%" stop-color="#c084fc" />
                             </linearGradient>
-                            <filter id="glowOverlay" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="6" result="blur" />
+                            <radialGradient id="pupilGradOverlay" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="35%" stop-color="#67e8f9" />
+                                <stop offset="75%" stop-color="#0284c7" />
+                                <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
+                            </radialGradient>
+                            <filter id="robotGlowOverlay" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="3.5" result="blur" />
                                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
                             </filter>
                         </defs>
-                        <g id="overlay-phys-orbits" transform="translate(300, 240)">
-                            <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGradOverlay)"
-                                stroke-width="1.5" transform="rotate(30)" opacity="0.6" />
-                            <circle cx="138" cy="22" r="4" fill="#FFD600" />
-                            <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGradOverlay)"
-                                stroke-width="1.5" transform="rotate(90)" opacity="0.6" />
-                            <circle cx="0" cy="160" r="4" fill="#FFD600" />
-                            <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGradOverlay)"
-                                stroke-width="1.5" transform="rotate(150)" opacity="0.6" />
-                            <circle cx="-138" cy="22" r="4" fill="#FFD600" />
+
+                        <!-- Exhaust particles -->
+                        <g opacity="0.75">
+                            <circle cx="100" cy="208" r="3" fill="#38bdf8">
+                                <animate attributeName="cy" values="208;230;208" dur="2.4s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="86" cy="214" r="2.2" fill="#818cf8">
+                                <animate attributeName="cy" values="214;232;214" dur="2.8s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="114" cy="212" r="2.5" fill="#34d399">
+                                <animate attributeName="cy" values="212;234;212" dur="2.1s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
+                            </circle>
                         </g>
-                        <path id="overlay-chem-hex" d="M 300 90 L 410 155 L 410 325 L 300 390 L 190 325 L 190 155 Z"
-                            fill="#161b22" stroke="url(#chemGradOverlay)" stroke-width="3" stroke-linejoin="round"
-                            opacity="0.9" />
-                        <path
-                            d="M 300 90 L 300 130 M 190 155 L 230 180 M 410 155 L 370 180 M 190 325 L 230 300 M 410 325 L 370 300 M 300 390 L 300 350"
-                            stroke="url(#chemGradOverlay)" stroke-width="1.5" opacity="0.5" stroke-linecap="round" />
-                        <g id="overlay-dna-helix" transform="translate(0, -20)">
-                            <path d="M 285 160 Q 330 190 285 220 T 285 280 T 285 340" fill="none"
-                                stroke="url(#bioGradOverlay)" stroke-width="3" stroke-linecap="round" />
-                            <path d="M 315 160 Q 270 190 315 220 T 315 280 T 315 340" fill="none"
-                                stroke="url(#bioGradOverlay)" stroke-width="3" stroke-linecap="round" />
-                            <line x1="292" y1="175" x2="308" y2="175" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="190" x2="314" y2="190" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="205" x2="314" y2="205" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="292" y1="235" x2="308" y2="235" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="250" x2="314" y2="250" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="265" x2="314" y2="265" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="292" y1="295" x2="308" y2="295" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="310" x2="314" y2="310" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
-                            <line x1="286" y1="325" x2="314" y2="325" stroke="url(#bioGradOverlay)"
-                                stroke-width="1.5" />
+
+                        <!-- Left Arm -->
+                        <g class="robot-arm-left">
+                            <circle cx="58" cy="148" r="6" fill="url(#darkMetalOverlay)" stroke="#38bdf8" stroke-width="0.5" />
+                            <path d="M50 152 L42 178 C40 183, 48 186, 52 181 L60 156 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
+                            <path d="M47 160 L44 172" stroke="url(#neonGlowOverlay)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="43" cy="188" r="7" fill="url(#darkMetalOverlay)" stroke="#38bdf8" stroke-width="0.5" />
+                            <circle cx="43" cy="188" r="3.5" fill="#38bdf8" filter="url(#robotGlowOverlay)" />
                         </g>
-                        <path id="overlay-robot-eye"
-                            d="M 205 230 L 285 255 L 300 265 L 315 255 L 395 230 L 395 245 L 315 270 L 300 280 L 285 270 L 205 245 Z"
-                            fill="#00d2ff" filter="url(#glowOverlay)" />
-                        <circle id="overlay-robot-core" cx="300" cy="245" r="5" fill="#ffffff"
-                            filter="url(#glowOverlay)" />
+
+                        <!-- Right Arm -->
+                        <g class="robot-arm-right">
+                            <circle cx="142" cy="148" r="6" fill="url(#darkMetalOverlay)" stroke="#818cf8" stroke-width="0.5" />
+                            <path d="M150 152 L158 178 C160 183, 152 186, 148 181 L140 156 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.5" />
+                            <path d="M153 160 L156 172" stroke="url(#neonGlowOverlay)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="157" cy="188" r="7" fill="url(#darkMetalOverlay)" stroke="#818cf8" stroke-width="0.5" />
+                            <circle cx="157" cy="188" r="3.5" fill="#818cf8" filter="url(#robotGlowOverlay)" />
+                        </g>
+
+                        <!-- Main Body -->
+                        <g class="robot-main-body">
+                            <rect x="92" y="112" width="16" height="12" rx="4" fill="url(#darkMetalOverlay)" stroke="#475569" stroke-width="0.5" />
+                            <path d="M52 135 C52 125, 68 123, 72 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
+                            <path d="M148 135 C148 125, 132 123, 128 138 Z" fill="url(#armorGradOverlay)" stroke="#e2e8f0" stroke-width="0.5" />
+                            <path d="M85 190 Q100 228 115 190 Z" fill="url(#neonGlowOverlay)" filter="url(#robotGlowOverlay)" opacity="0.9">
+                                <animate attributeName="opacity" values="0.75;1;0.75" dur="0.12s" repeatCount="indefinite" />
+                            </path>
+                            <path d="M92 190 Q100 212 108 190 Z" fill="#ffffff" filter="url(#robotGlowOverlay)" opacity="0.95" />
+                            <path d="M70 132 L130 132 L120 186 C120 191, 80 191, 80 186 Z" fill="url(#armorGradOverlay)" stroke="#cbd5e1" stroke-width="0.75" />
+                            <path d="M82 138 L118 138 L110 180 C110 183, 90 183, 90 180 Z" fill="url(#darkMetalOverlay)" />
+                            <ellipse cx="100" cy="158" rx="14" ry="5" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.7" transform="rotate(-15 100 158)" class="robot-core-orbit" />
+                            <circle cx="100" cy="158" r="9" fill="url(#neonGlowOverlay)" filter="url(#robotGlowOverlay)" />
+                            <circle cx="100" cy="158" r="4.5" fill="#ffffff" />
+                            <rect x="33" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <rect x="159" y="65" width="8" height="15" rx="3" fill="url(#darkMetalOverlay)" />
+                            <line x1="37" y1="65" x2="30" y2="46" stroke="url(#neonGlowOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <line x1="163" y1="65" x2="170" y2="46" stroke="url(#neonGlowOverlay)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlowOverlay)" />
+                            <circle cx="30" cy="46" r="3" fill="#ffffff" filter="url(#robotGlowOverlay)" />
+                            <circle cx="170" cy="46" r="3" fill="#ffffff" filter="url(#robotGlowOverlay)" />
+                            <rect x="38" y="42" width="124" height="76" rx="38" fill="url(#armorGradOverlay)" stroke="#f1f5f9" stroke-width="0.75" />
+                            <rect x="46" y="49" width="108" height="62" rx="30" fill="url(#visorGradOverlay)" stroke="#1e293b" stroke-width="1" />
+                            <rect x="48" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#neonGlowOverlay)" stroke-width="1" opacity="0.45" />
+                            <g class="robot-eyes-group">
+                                <ellipse cx="78" cy="78" rx="16" ry="12" fill="#020617" />
+                                <ellipse cx="122" cy="78" rx="16" ry="12" fill="#020617" />
+                                <g class="overlay-pupil-left">
+                                    <circle cx="78" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="79.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                </g>
+                                <g class="overlay-pupil-right">
+                                    <circle cx="122" cy="78" r="7.5" fill="url(#pupilGradOverlay)" filter="url(#robotGlowOverlay)" />
+                                    <circle cx="123.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                </g>
+                            </g>
+                            <path d="M 52 64 C 70 53, 110 53, 148 64 C 130 57, 70 57, 52 64 Z" fill="#ffffff" opacity="0.25" />
+                        </g>
                     </svg>
                 </div>
                 <div class="text-left">
@@ -427,73 +538,167 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex justify-center">
-                    <div class="w-full max-w-[520px] text-center entry-load-hidden">
-                        <svg id="robot-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%"
-                            height="100%" tabindex="0" role="img"
-                            aria-label="Robot illustration with SYNTHESIS and INTELLIGENT BIOSCIENCE labels">
-                            <defs>
-                                <linearGradient id="chemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#00d2ff" />
-                                    <stop offset="100%" stop-color="#3a7bd5" />
-                                </linearGradient>
-                                <linearGradient id="bioGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="#00E676" />
-                                    <stop offset="100%" stop-color="#1DE9B6" />
-                                </linearGradient>
-                                <linearGradient id="physGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#FFAB00" />
-                                    <stop offset="100%" stop-color="#FFD600" />
-                                </linearGradient>
-                                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                    <feGaussianBlur stdDeviation="6" result="blur" />
-                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                </filter>
-                            </defs>
-                            <g id="phys-orbits" transform="translate(300, 240)">
-                                <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGrad)"
-                                    stroke-width="1.5" transform="rotate(30)" opacity="0.6" />
-                                <circle id="orbit-dot-1" cx="138" cy="22" r="4" fill="#FFD600" />
-                                <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGrad)"
-                                    stroke-width="1.5" transform="rotate(90)" opacity="0.6" />
-                                <circle id="orbit-dot-2" cx="0" cy="160" r="4" fill="#FFD600" />
-                                <ellipse cx="0" cy="0" rx="160" ry="45" fill="none" stroke="url(#physGrad)"
-                                    stroke-width="1.5" transform="rotate(150)" opacity="0.6" />
-                                <circle id="orbit-dot-3" cx="-138" cy="22" r="4" fill="#FFD600" />
-                            </g>
-                            <path id="chem-hex" d="M 300 90 L 410 155 L 410 325 L 300 390 L 190 325 L 190 155 Z"
-                                fill="#161b22" stroke="url(#chemGrad)" stroke-width="3" stroke-linejoin="round"
-                                opacity="0.9" />
-                            <path
-                                d="M 300 90 L 300 130 M 190 155 L 230 180 M 410 155 L 370 180 M 190 325 L 230 300 M 410 325 L 370 300 M 300 390 L 300 350"
-                                stroke="url(#chemGrad)" stroke-width="1.5" opacity="0.5" stroke-linecap="round" />
-                            <g id="dna-helix" transform="translate(0, -20)">
-                                <path d="M 285 160 Q 330 190 285 220 T 285 280 T 285 340" fill="none"
-                                    stroke="url(#bioGrad)" stroke-width="3" stroke-linecap="round" />
-                                <path d="M 315 160 Q 270 190 315 220 T 315 280 T 315 340" fill="none"
-                                    stroke="url(#bioGrad)" stroke-width="3" stroke-linecap="round" />
-                                <line x1="292" y1="175" x2="308" y2="175" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="190" x2="314" y2="190" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="205" x2="314" y2="205" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="292" y1="235" x2="308" y2="235" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="250" x2="314" y2="250" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="265" x2="314" y2="265" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="292" y1="295" x2="308" y2="295" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="310" x2="314" y2="310" stroke="url(#bioGrad)" stroke-width="1.5" />
-                                <line x1="286" y1="325" x2="314" y2="325" stroke="url(#bioGrad)" stroke-width="1.5" />
-                            </g>
-                            <path id="robot-eye"
-                                d="M 205 230 L 285 255 L 300 265 L 315 255 L 395 230 L 395 245 L 315 270 L 300 280 L 285 270 L 205 245 Z"
-                                fill="#00d2ff" filter="url(#glow)" />
-                            <circle id="robot-core" cx="300" cy="245" r="5" fill="#ffffff" filter="url(#glow)" />
-                            <text id="robot-text-title" x="300" y="480"
-                                font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="800"
-                                font-size="34" fill="#ffffff" text-anchor="middle" letter-spacing="8">SYNTHESIS</text>
-                            <text id="robot-text-subtitle" x="300" y="515"
-                                font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="400"
-                                font-size="13" fill="#8b949e" text-anchor="middle" letter-spacing="4">INTELLIGENT
-                                BIOSCIENCE</text>
-                        </svg>
+                <div class="flex justify-center items-center">
+                    <div class="w-full max-w-[480px] flex flex-col items-center text-center entry-load-hidden robot-card-container">
+                        <!-- Gen-Z Floating AI Status Pill -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 backdrop-blur-md shadow-lg shadow-cyan-500/10 mb-2 select-none">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span class="font-mono text-cyan-300 font-semibold text-xs tracking-wider">SYNTHESIS AI</span>
+                            <span class="text-white/30">•</span>
+                            <span class="text-slate-400 font-mono text-[11px]">ACTIVE</span>
+                        </div>
+
+                        <!-- Speech Bubble -->
+                        <div id="synthesis-bubble" class="synthesis-speech-bubble mb-3 px-4 py-2 rounded-2xl bg-slate-900/90 border border-white/10 shadow-xl backdrop-blur-xl text-xs text-slate-200 flex items-center gap-2 max-w-xs transition-all duration-300">
+                            <span class="text-base" id="synthesis-emoji">🧬</span>
+                            <span id="synthesis-speech-text" class="font-medium">Yo! I'm Synthesis AI. Let's explore Malik's work! ✨</span>
+                        </div>
+
+                        <!-- Interactive 3D Robot Wrapper -->
+                        <div id="robot-3d-wrapper" class="robot-interactive-wrapper w-full max-w-[320px] md:max-w-[360px] aspect-square flex items-center justify-center relative select-none">
+                            <!-- Background Cyber Glow / Halo -->
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-blue-500/10 to-purple-500/20 blur-2xl pointer-events-none transform scale-90"></div>
+                            
+                            <svg id="robot-svg" viewBox="0 0 200 240" class="w-full h-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.25)] select-none" role="img" aria-label="Synthesis AI Robot Companion">
+                                <defs>
+                                    <radialGradient id="visorGrad" cx="50%" cy="40%" r="60%">
+                                        <stop offset="0%" stop-color="#0f172a" />
+                                        <stop offset="70%" stop-color="#090d16" />
+                                        <stop offset="100%" stop-color="#030712" />
+                                    </radialGradient>
+                                    <linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#e2e8f0" />
+                                        <stop offset="70%" stop-color="#cbd5e1" />
+                                        <stop offset="100%" stop-color="#94a3b8" />
+                                    </linearGradient>
+                                    <linearGradient id="darkMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#334155" />
+                                        <stop offset="100%" stop-color="#0f172a" />
+                                    </linearGradient>
+                                    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#38bdf8" />
+                                        <stop offset="50%" stop-color="#818cf8" />
+                                        <stop offset="100%" stop-color="#c084fc" />
+                                    </linearGradient>
+                                    <radialGradient id="pupilGrad" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="35%" stop-color="#67e8f9" />
+                                        <stop offset="75%" stop-color="#0284c7" />
+                                        <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
+                                    </radialGradient>
+                                    <filter id="robotGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="4" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+
+                                <!-- Exhaust particles underneath thruster -->
+                                <g class="robot-exhaust-particles" opacity="0.75">
+                                    <circle cx="100" cy="208" r="3" fill="#38bdf8">
+                                        <animate attributeName="cy" values="208;230;208" dur="2.4s" repeatCount="indefinite" />
+                                        <animate attributeName="opacity" values="0.9;0;0.9" dur="2.4s" repeatCount="indefinite" />
+                                        <animate attributeName="r" values="3;1.5;3" dur="2.4s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="86" cy="214" r="2.2" fill="#818cf8">
+                                        <animate attributeName="cy" values="214;232;214" dur="2.8s" repeatCount="indefinite" />
+                                        <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="114" cy="212" r="2.5" fill="#34d399">
+                                        <animate attributeName="cy" values="212;234;212" dur="2.1s" repeatCount="indefinite" />
+                                        <animate attributeName="opacity" values="0.8;0;0.8" dur="2.1s" repeatCount="indefinite" />
+                                    </circle>
+                                </g>
+
+                                <!-- Floating Left Arm -->
+                                <g class="robot-arm-left">
+                                    <circle cx="58" cy="148" r="6" fill="url(#darkMetal)" stroke="#38bdf8" stroke-width="0.5" />
+                                    <path d="M50 152 L42 178 C40 183, 48 186, 52 181 L60 156 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
+                                    <path d="M47 160 L44 172" stroke="url(#neonGlow)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlow)" />
+                                    <circle cx="43" cy="188" r="7" fill="url(#darkMetal)" stroke="#38bdf8" stroke-width="0.5" />
+                                    <circle cx="43" cy="188" r="3.5" fill="#38bdf8" filter="url(#robotGlow)" />
+                                </g>
+
+                                <!-- Floating Right Arm -->
+                                <g class="robot-arm-right">
+                                    <circle cx="142" cy="148" r="6" fill="url(#darkMetal)" stroke="#818cf8" stroke-width="0.5" />
+                                    <path d="M150 152 L158 178 C160 183, 152 186, 148 181 L140 156 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.5" />
+                                    <path d="M153 160 L156 172" stroke="url(#neonGlow)" stroke-width="1.5" stroke-linecap="round" filter="url(#robotGlow)" />
+                                    <circle cx="157" cy="188" r="7" fill="url(#darkMetal)" stroke="#818cf8" stroke-width="0.5" />
+                                    <circle cx="157" cy="188" r="3.5" fill="#818cf8" filter="url(#robotGlow)" />
+                                </g>
+
+                                <!-- Main Body Group -->
+                                <g class="robot-main-body">
+                                    <!-- Neck connector -->
+                                    <rect x="92" y="112" width="16" height="12" rx="4" fill="url(#darkMetal)" stroke="#475569" stroke-width="0.5" />
+
+                                    <!-- Shoulder armor pads -->
+                                    <path d="M52 135 C52 125, 68 123, 72 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
+                                    <path d="M148 135 C148 125, 132 123, 128 138 Z" fill="url(#armorGrad)" stroke="#e2e8f0" stroke-width="0.5" />
+
+                                    <!-- Thruster cone / jet flame -->
+                                    <path d="M85 190 Q100 228 115 190 Z" fill="url(#neonGlow)" filter="url(#robotGlow)" opacity="0.9">
+                                        <animate attributeName="opacity" values="0.75;1;0.75" dur="0.12s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M92 190 Q100 212 108 190 Z" fill="#ffffff" filter="url(#robotGlow)" opacity="0.95" />
+
+                                    <!-- Torso armor outer -->
+                                    <path d="M70 132 L130 132 L120 186 C120 191, 80 191, 80 186 Z" fill="url(#armorGrad)" stroke="#cbd5e1" stroke-width="0.75" />
+                                    <!-- Torso dark tech core recessed cavity -->
+                                    <path d="M82 138 L118 138 L110 180 C110 183, 90 183, 90 180 Z" fill="url(#darkMetal)" />
+
+                                    <!-- Synthesis Chest Arc Reactor with glowing orbital ring -->
+                                    <ellipse cx="100" cy="158" rx="14" ry="5" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.7" transform="rotate(-15 100 158)" class="robot-core-orbit" />
+                                    <circle cx="100" cy="158" r="9" fill="url(#neonGlow)" filter="url(#robotGlow)" class="robot-core-pulse" />
+                                    <circle cx="100" cy="158" r="4.5" fill="#ffffff" />
+
+                                    <!-- Antennas / cyber ears -->
+                                    <rect x="33" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <rect x="159" y="65" width="8" height="15" rx="3" fill="url(#darkMetal)" />
+                                    <line x1="37" y1="65" x2="30" y2="46" stroke="url(#neonGlow)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlow)" />
+                                    <line x1="163" y1="65" x2="170" y2="46" stroke="url(#neonGlow)" stroke-width="2.5" stroke-linecap="round" filter="url(#robotGlow)" />
+                                    <circle cx="30" cy="46" r="3" fill="#ffffff" filter="url(#robotGlow)" />
+                                    <circle cx="170" cy="46" r="3" fill="#ffffff" filter="url(#robotGlow)" />
+
+                                    <!-- Head outer helmet -->
+                                    <rect x="38" y="42" width="124" height="76" rx="38" fill="url(#armorGrad)" stroke="#f1f5f9" stroke-width="0.75" />
+
+                                    <!-- Visor screen frame -->
+                                    <rect x="46" y="49" width="108" height="62" rx="30" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="1" />
+                                    <rect x="48" y="51" width="104" height="58" rx="28" fill="none" stroke="url(#neonGlow)" stroke-width="1" opacity="0.45" />
+
+                                    <!-- Eyes (left and right eye sockets & pupils) -->
+                                    <g class="robot-eyes-group">
+                                        <!-- Left eye socket -->
+                                        <ellipse cx="78" cy="78" rx="16" ry="12" fill="#020617" />
+                                        <!-- Right eye socket -->
+                                        <ellipse cx="122" cy="78" rx="16" ry="12" fill="#020617" />
+
+                                        <!-- Left pupil (follows cursor) -->
+                                        <g class="robot-pupil-left-group">
+                                            <circle cx="78" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#robotGlow)" class="robot-pupil" />
+                                            <circle cx="79.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                        </g>
+
+                                        <!-- Right pupil (follows cursor) -->
+                                        <g class="robot-pupil-right-group">
+                                            <circle cx="122" cy="78" r="7.5" fill="url(#pupilGrad)" filter="url(#robotGlow)" class="robot-pupil" />
+                                            <circle cx="123.5" cy="76.5" r="2.2" fill="#ffffff" />
+                                        </g>
+                                    </g>
+
+                                    <!-- Glossy curved glass reflection on visor -->
+                                    <path d="M 52 64 C 70 53, 110 53, 148 64 C 130 57, 70 57, 52 64 Z" fill="#ffffff" opacity="0.25" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Synthesis Typography -->
+                        <div class="mt-4 text-center select-none">
+                            <h3 class="text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-400">SYNTHESIS</h3>
+                            <p class="text-xs font-mono tracking-[0.3em] text-slate-400 uppercase mt-1">Intelligent Bioscience & Code Companion</p>
+                        </div>
                     </div>
                 </div>
             </div>
